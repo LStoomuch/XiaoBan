@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+  <!-- 加载Spring配置文件 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  <!-- 启动spring容器监听器 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!-- Log4j配置 -->
+  <context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>Blog.root</param-value>
+  </context-param>
+  <context-param>
+
+    <param-name>log4jConfigLocation</param-name>
+
+    <param-value>/WEB-INF/log4j.properties</param-value>
+
+  </context-param>
+
+  <!-- 加载log4j配置文件 -->
+  <listener>
+
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+
+  </listener>
+
+  <!--默认首页-->
+  <welcome-file-list>
+    <welcome-file>/index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
