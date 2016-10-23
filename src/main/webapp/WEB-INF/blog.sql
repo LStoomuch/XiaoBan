@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : lvxi-PC
+Source Server         : LS
 Source Server Version : 50713
 Source Host           : localhost:3306
 Source Database       : blog
