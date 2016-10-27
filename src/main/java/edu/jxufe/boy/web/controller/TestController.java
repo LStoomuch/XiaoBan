@@ -32,7 +32,6 @@ public class TestController {
 	public ModelAndView home(HttpServletRequest request){
 		logger.info("访问测试首页控制器");
 		List<User> list = userServiceImpl.queryAll();
-		System.out.println(list.get(0).getPkUser()+" "+list.get(0).getAccount());
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("userList",list);
 		return mav;

@@ -28,10 +28,8 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	public BaseDaoImpl(){
 		//获取实体类类型
 		Type genType = getClass().getGenericSuperclass();
-		System.out.println(genType);
 		Type[] params = ((ParameterizedType)genType).getActualTypeArguments();
 		entityClass = (Class) params[0];
-
 	}
 	
 //	@Autowired
