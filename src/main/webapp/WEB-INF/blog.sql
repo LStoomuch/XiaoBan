@@ -85,7 +85,7 @@ CREATE TABLE `tb_user` (
   `pkUser` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `account` varchar(50) NOT NULL,
   `nickname` varchar(50) NOT NULL,
-  `sex` bit(1) NOT NULL,
+  `sex` VARCHAR(20) NOT NULL,
   `email` varchar(60) DEFAULT NULL,
   `head` varchar(60) DEFAULT NULL,
   `signa` varchar(255) DEFAULT NULL,

@@ -12,39 +12,50 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>regist</title>
+    <title>注册</title>
     <link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
 
 <body>
 <div class="container">
     <h2>注册页面</h2>
-    <form role="form" action="success" method="post">
+    <form role="form" id="registerForm">
         <div class="form-group">
-            <label for="email">邮箱:</label>
-            <input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
+            <label for="email">账号:</label>
+            <input type="text" class="form-control" name="email" id="email" placeholder="建议用邮箱账号">
         </div>
         <div class="form-group">
-        <label for="password">密码:</label>
-        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
-    </div>
+            <label for="password">密码:</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="密码">
+        </div>
         <div class="form-group">
             <label for="passwordConfirm">确认密码:</label>
-            <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" placeholder="Enter password again">
+            <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" placeholder="确认密码">
+        </div>
+        <div class="form-group">
+            <label for="nickname">昵称:</label>
+            <input type="text" class="form-control" name="nickname" id="nickname" placeholder="用户昵称">
         </div>
         <div class="radio">
-            <label><input type="radio" name="optradio" value="1" checked>汉纸</label>
+            <label><input type="radio" name="sex" value="1" checked>汉纸</label>
         </div>
         <div class="radio">
-            <label><input type="radio" name="optradio" value="0">妹纸</label>
+            <label><input type="radio" name="sex" value="0">妹纸</label>
         </div>
-        <div class="radio disabled">
-            <label><input type="radio" name="optradio" disabled>哲♂学家</label>
+        <div class="form-group">
+            <label for="phone">手机:</label>
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="手机号码">
         </div>
-        <button type="submit" class="btn btn-default">注册</button>
+        <div class="form-group">
+            <label for="city">城市:</label>
+            <input type="text" class="form-control" name="city" id="city" placeholder="所在城市">
+        </div>
+        <button type="submit" class="btn btn-default" id="registerButton">注册</button>
     </form>
 </div>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+<script src="../../../js/pub/layer/layer.js"></script>
+<script src="../../../js/register/register.js"></script>
 </body>
 </html>

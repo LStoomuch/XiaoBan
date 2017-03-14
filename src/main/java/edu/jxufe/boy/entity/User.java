@@ -30,7 +30,7 @@ public class User  implements java.io.Serializable {
      private Long pkUser;
      private String account;
      private String nickname;
-     private Boolean sex;
+     private String sex;
      private String email;
      private String head;
      private String signa;
@@ -47,14 +47,14 @@ public class User  implements java.io.Serializable {
     }
 
 	/** minimal constructor */
-    public User(String account, String nickname, Boolean sex) {
+    public User(String account, String nickname, String sex) {
         this.account = account;
         this.nickname = nickname;
         this.sex = sex;
     }
     
     /** full constructor */
-    public User(String account, String nickname, Boolean sex, String email, String head, String signa, String phone, String city, Set<UserPrivate> userPrivates, Set<UserRole> userRoles) {
+    public User(String account, String nickname, String sex, String email, String head, String signa, String phone, String city, Set<UserPrivate> userPrivates, Set<UserRole> userRoles) {
         this.account = account;
         this.nickname = nickname;
         this.sex = sex;
@@ -103,11 +103,11 @@ public class User  implements java.io.Serializable {
     
     @Column(name="sex", nullable=false)
 
-    public Boolean getSex() {
+    public String getSex() {
         return this.sex;
     }
     
-    public void setSex(Boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
     

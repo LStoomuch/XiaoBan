@@ -46,24 +46,14 @@
                 </li>
             </ul>
             <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="username" id="idInput">
 
-                    <input type="password" class="form-control" placeholder="password">
-
-                </div>
-
-                <button type="submit" class="btn btn-default" onclick="trylogin();">登录</button>
+                <button type="submit" class="btn btn-default" onclick="toLogin();">登录</button>
                 <button onclick="jumpToRegister();return false;" class="btn btn-default ">注册</button>
             </form>
 
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div><a href="homepage/toRegister">wwwwww</a></div>
-<div><a href="www.baidu.com">wwwwwww</a></div>
-<div><a href="www.baidu.com">wwww</a></div>
-<div><a href="www.baidu.com">wwwww</a></div>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 <script src="../../../js/Homepage.js"></script>

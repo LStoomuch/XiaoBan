@@ -1,5 +1,6 @@
 package edu.jxufe.boy.web.controller;
 
+import edu.jxufe.boy.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,16 +16,20 @@ public class HomeController {
     public String getHomePage(){
         return "Homepage/Homepage";
     }
-    @RequestMapping("toRegister")
+    @RequestMapping("/toLogin")
+    public String toLogin(){
+        return "login/login";
+    }
+    @RequestMapping("/toRegister")
     public String toRegister(){
         return "register/register";
     }
-    @RequestMapping("success")
-    public String success(HttpServletRequest request){
-        System.out.println(request.getParameter("email"));
-        System.out.println(request.getParameter("password"));
-        System.out.println(request.getParameter("passwordConfirm"));
-        System.out.println(request.getParameter("optradio"));
+    @RequestMapping("/register")
+    public String Register(User user){
+        return "success";
+    }
+    @RequestMapping("/login")
+    public String success(){
         return "success";
     }
 }
