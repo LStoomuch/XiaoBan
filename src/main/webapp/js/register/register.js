@@ -2,7 +2,7 @@
  * Created by liaosheng on 2017/3/14.
  */
 $(document).ready(function () {
-   $("input#passwordConfirm").blur(function () {debugger
+   $("input#passwordConfirm").blur(function () {
       if($("input#passwordConfirm").val()!=$("input#password").val()){
           layer.msg('请确认密码', function(){
                 $("input#passwordConfirm").focus();
@@ -17,7 +17,7 @@ $(document).ready(function () {
             url : "/homepage/register",
             data:formData,
             dataType:"json",
-            success:function (data) {debugger
+            success:function (data) {
                 if(data.loginState==="1"){
                     layer.alert('见到你真的很高兴', {icon: 6},function () {
                         document.location.href="registerSuccess";
@@ -25,7 +25,7 @@ $(document).ready(function () {
                 }
 
             },
-            error:function (data) {debugger
+            error:function (data) {
                 console.log(data.loginState);
                 window.location="/homepage/registerSuccess";
             }

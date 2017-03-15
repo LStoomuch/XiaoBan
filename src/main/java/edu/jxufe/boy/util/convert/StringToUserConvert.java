@@ -11,9 +11,7 @@ public class StringToUserConvert implements Converter<String,User>{
         User user=new User();
         if(source!=null){
             String[] item=source.split(":");
-            user.setCity(item[0]);
-            user.setPhone(item[1]);
-            user.setEmail(item[2]);
+
         }
       return user;
     }

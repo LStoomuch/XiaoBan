@@ -34,6 +34,20 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource"
+          p:basename="i18n/messages" />
+
+    <bean id="exceptionResolver" class="edu.jxufe.boy.web.controller.ForumHandlerExceptionResolver">
+        <property name="defaultErrorView">
+            <value>fail</value>
+        </property>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.RuntimeException">fail</prop>
+            </props>
+        </property>
+    </bean>
     <!--mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"></mvc:mapping>

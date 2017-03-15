@@ -30,6 +30,7 @@
     <bean id="sessionFactory"
      class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+
         <property name="hibernateProperties">
             <props>
                 <!-- 指定数据库方言 -->
@@ -53,6 +54,7 @@
             <value>edu.jxufe.boy.entity</value>
             </list>
         </property>
+
     </bean>
 
     <bean id="transactionManager"
