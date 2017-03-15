@@ -18,7 +18,7 @@
 
 <body>
 <div class="container">
-    <h2>注册页面</h2>
+    <h2>Register</h2>
     <form role="form" id="registerForm">
         <div class="form-group">
             <label for="email">账号:</label>
@@ -50,7 +50,7 @@
             <label for="city">城市:</label>
             <input type="text" class="form-control" name="city" id="city" placeholder="所在城市">
         </div>
-        <button type="submit" class="btn btn-default" id="registerButton">注册</button>
+        <button type="button" class="btn btn-default" id="registerButton">注册</button>
     </form>
 </div>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>

@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>登陆页面</h2>
+    <h2>Login</h2>
     <form role="form" action="/homepage/login" method="post">
         <div class="form-group">
             <label for="email">账号:</label>

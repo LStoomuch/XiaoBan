@@ -1,5 +1,6 @@
-package edu.jxufe.boy.dao;
+package edu.jxufe.boy.dao.UserDao;
 
+import edu.jxufe.boy.dao.BaseDao.BaseDaoImpl;
 import edu.jxufe.boy.entity.User;
 import org.springframework.stereotype.Repository;
 

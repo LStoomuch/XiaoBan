@@ -1,4 +1,4 @@
-package edu.jxufe.boy.dao;
+package edu.jxufe.boy.dao.BaseDao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -7,15 +7,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
 import edu.jxufe.boy.util.Page;
-import org.apache.log4j.Logger;
-import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 

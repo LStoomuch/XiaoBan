@@ -1,4 +1,4 @@
-package edu.jxufe.boy.service;
+package edu.jxufe.boy.service.BaseService;
 
 import edu.jxufe.boy.util.Page;
 

@@ -65,6 +65,10 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
+    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
 
      <!--使用annotation定义事务-->
      <!--false默认用JDK动态代理，true使用cglib动态代理-->

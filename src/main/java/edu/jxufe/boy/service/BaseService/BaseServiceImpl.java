@@ -1,9 +1,7 @@
-package edu.jxufe.boy.service;
+package edu.jxufe.boy.service.BaseService;
 
-import edu.jxufe.boy.dao.BaseDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.jxufe.boy.dao.BaseDao.BaseDao;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package edu.jxufe.boy.dao;
+package edu.jxufe.boy.dao.BaseDao;
 
 import edu.jxufe.boy.util.Page;
 

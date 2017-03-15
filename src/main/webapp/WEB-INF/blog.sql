@@ -1,125 +1,108 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : LS
-Source Server Version : 50713
+Source Server         : liaosheng
+Source Server Version : 80000
 Source Host           : localhost:3306
 Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 50713
+Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2016-08-07 10:49:50
+Date: 2017-03-15 17:17:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for tb_group
+-- Table structure for t_board
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_group`;
-CREATE TABLE `tb_group` (
-  `pkGroup` bigint(20) NOT NULL,
-  `name` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`pkGroup`)
+DROP TABLE IF EXISTS `t_board`;
+CREATE TABLE `t_board` (
+  `board_id` int(50) NOT NULL AUTO_INCREMENT COMMENT '版块ID',
+  `board_name` varchar(150) NOT NULL COMMENT '板块名',
+  `board_desc` varchar(255) DEFAULT NULL COMMENT '板块描述',
+  `topic_num` int(50) NOT NULL DEFAULT '0' COMMENT '帖子数目',
+  `deleteflag` tinyint(4) DEFAULT NULL COMMENT '0：未删除 1：已删除',
+  PRIMARY KEY (`board_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_menu
+-- Table structure for t_board_manager
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_menu`;
-CREATE TABLE `tb_menu` (
-  `pkMenu` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `code` int(11) NOT NULL,
-  `addresss` varchar(50) NOT NULL,
-  `query` bit(1) NOT NULL DEFAULT b'0',
-  `add` bit(1) NOT NULL DEFAULT b'0',
-  `delete` bit(1) NOT NULL DEFAULT b'0',
-  `update` bit(1) NOT NULL DEFAULT b'0',
-  `enable` bit(1) NOT NULL DEFAULT b'1',
-  PRIMARY KEY (`pkMenu`)
+DROP TABLE IF EXISTS `t_board_manager`;
+CREATE TABLE `t_board_manager` (
+  `board_id` int(50) NOT NULL,
+  `user_id` int(50) NOT NULL,
+  `deleteflag` tinyint(4) DEFAULT NULL COMMENT '0：未删除 1：已删除',
+  PRIMARY KEY (`board_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_role
+-- Table structure for t_login_log
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_role`;
-CREATE TABLE `tb_role` (
-  `pkRole` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
-  `parent` bigint(20) unsigned DEFAULT NULL COMMENT '父角色pkRole',
-  `enable` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`pkRole`),
-  KEY `parent` (`parent`),
-  CONSTRAINT `tb_role_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `tb_role` (`pkRole`) ON DELETE CASCADE ON UPDATE NO ACTION
+DROP TABLE IF EXISTS `t_login_log`;
+CREATE TABLE `t_login_log` (
+  `login_log_id` int(11) NOT NULL COMMENT '日志Id',
+  `user_id` int(11) DEFAULT NULL COMMENT '发表者ID',
+  `ip` varchar(30) DEFAULT NULL COMMENT '登陆IP',
+  `login_datetime` datetime DEFAULT NULL COMMENT '登陆时间',
+  `deleteflag` tinyint(4) DEFAULT NULL COMMENT '0：未删除 1：已删除',
+  PRIMARY KEY (`login_log_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_role_menu
+-- Table structure for t_post
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_role_menu`;
-CREATE TABLE `tb_role_menu` (
-  `pkRoleMenu` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `pkRole` bigint(20) unsigned NOT NULL,
-  `pkMenu` bigint(20) unsigned NOT NULL,
-  `add` bit(1) NOT NULL DEFAULT b'0',
-  `delete` bit(1) NOT NULL DEFAULT b'0',
-  `query` bit(1) NOT NULL DEFAULT b'0',
-  `update` bit(1) NOT NULL DEFAULT b'0',
-  `bgn_date` datetime DEFAULT NULL,
-  `end_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`pkRoleMenu`),
-  KEY `pkRole` (`pkRole`),
-  KEY `pkMenu` (`pkMenu`),
-  CONSTRAINT `tb_role_menu_ibfk_1` FOREIGN KEY (`pkRole`) REFERENCES `tb_role` (`pkRole`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `tb_role_menu_ibfk_2` FOREIGN KEY (`pkMenu`) REFERENCES `tb_menu` (`pkMenu`) ON DELETE CASCADE ON UPDATE NO ACTION
+DROP TABLE IF EXISTS `t_post`;
+CREATE TABLE `t_post` (
+  `post_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '帖子详情ID',
+  `board_id` int(11) DEFAULT NULL COMMENT '板块ID',
+  `topic_id` int(11) DEFAULT NULL COMMENT '帖子ID',
+  `user_id` int(11) DEFAULT NULL COMMENT '发表者ID',
+  `post_type` tinyint(4) DEFAULT NULL COMMENT '帖子类型 1：主帖子 2：回复帖子',
+  `post_title` varchar(50) DEFAULT NULL COMMENT '帖子标题',
+  `post_text` text COMMENT '帖子内容',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `deleteflag` tinyint(4) DEFAULT NULL COMMENT '0：未删除 1：已删除',
+  PRIMARY KEY (`post_id`),
+  KEY `topic_id_index` (`topic_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_user
+-- Table structure for t_topic
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_user`;
-CREATE TABLE `tb_user` (
-  `pkUser` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `account` varchar(50) NOT NULL,
-  `nickname` varchar(50) NOT NULL,
-  `sex` VARCHAR(20) NOT NULL,
-  `email` varchar(60) DEFAULT NULL,
-  `head` varchar(60) DEFAULT NULL,
-  `signa` varchar(255) DEFAULT NULL,
-  `phone` varchar(11) DEFAULT NULL,
-  `city` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`pkUser`),
-  UNIQUE KEY `account` (`account`)
+DROP TABLE IF EXISTS `t_topic`;
+CREATE TABLE `t_topic` (
+  `topic_id` int(50) NOT NULL AUTO_INCREMENT COMMENT '帖子ID',
+  `board_id` int(50) NOT NULL COMMENT '所属板块',
+  `topic_title` varchar(100) NOT NULL COMMENT '帖子标题',
+  `user_id` int(11) NOT NULL COMMENT '发表者用户id',
+  `create_time` datetime NOT NULL COMMENT '发表时间',
+  `last_post_time` datetime NOT NULL COMMENT '最后回复时间',
+  `topic_views` int(11) NOT NULL COMMENT '浏览数',
+  `topic_replies` int(11) NOT NULL COMMENT '回复数',
+  `digest` int(11) NOT NULL COMMENT '是否是精选,1：是精选，0：不是精选',
+  `deleteflag` tinyint(4) DEFAULT NULL COMMENT '0：未删除 1：已删除',
+  PRIMARY KEY (`topic_id`),
+  KEY `topic_title_index` (`topic_title`) USING BTREE,
+  KEY `user_id_index` (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_user_private
+-- Table structure for t_user
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_user_private`;
-CREATE TABLE `tb_user_private` (
-  `pkUser` bigint(20) unsigned NOT NULL,
-  `passwd` varchar(32) NOT NULL,
-  `lock` bit(1) NOT NULL,
-  PRIMARY KEY (`pkUser`),
-  CONSTRAINT `tb_user_private_ibfk_1` FOREIGN KEY (`pkUser`) REFERENCES `tb_user` (`pkUser`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for tb_user_role
--- ----------------------------
-DROP TABLE IF EXISTS `tb_user_role`;
-CREATE TABLE `tb_user_role` (
-  `pkUserRole` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `pkUser` bigint(30) unsigned NOT NULL,
-  `pkRole` bigint(20) unsigned NOT NULL,
-  `bgn_date` datetime DEFAULT NULL COMMENT '开始时间',
-  `end_date` datetime DEFAULT NULL COMMENT '结束时间',
-  PRIMARY KEY (`pkUserRole`),
-  KEY `pkUser` (`pkUser`),
-  KEY `pkRole` (`pkRole`),
-  CONSTRAINT `tb_user_role_ibfk_1` FOREIGN KEY (`pkUser`) REFERENCES `tb_user` (`pkUser`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `tb_user_role_ibfk_2` FOREIGN KEY (`pkRole`) REFERENCES `tb_role` (`pkRole`) ON DELETE CASCADE ON UPDATE NO ACTION
+DROP TABLE IF EXISTS `t_user`;
+CREATE TABLE `t_user` (
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
+  `user_name` varchar(30) DEFAULT NULL COMMENT '用户名',
+  `user_nickname` varchar(30) DEFAULT NULL COMMENT '用户昵称',
+  `password` varchar(30) DEFAULT NULL COMMENT '密码',
+  `user_type` tinyint(4) DEFAULT NULL COMMENT '1:普通用户 2：管理员',
+  `locked` tinyint(4) DEFAULT NULL COMMENT '0：未锁定 1：锁定',
+  `credit` int(11) DEFAULT NULL COMMENT '积分',
+  `deleteflag` tinyint(4) DEFAULT NULL COMMENT '0：未删除 1：已删除',
+  PRIMARY KEY (`user_id`),
+  KEY `user_name_index` (`user_name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
