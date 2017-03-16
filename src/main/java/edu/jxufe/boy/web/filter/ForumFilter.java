@@ -1,4 +1,4 @@
-package edu.jxufe.boy.web.controller;
+package edu.jxufe.boy.web.filter;
 
 import java.io.IOException;
 
@@ -20,11 +20,14 @@ import static edu.jxufe.boy.cons.CommonConstant.USER_CONTEXT;
 public class ForumFilter implements Filter {
 	private static final String FILTERED_REQUEST = "@@session_context_filtered_request";
 
+//	// ① 不需要登录即可访问的URI资源
+//	private static final String[] INHERENT_ESCAPE_URIS = { "/index.jsp",
+//			"/index.html", "/login.jsp", "/login/doLogin.html",
+//			"/register.jsp", "/register.html", "/board/listBoardTopics-",
+//			"/board/listTopicPosts-" };
+
 	// ① 不需要登录即可访问的URI资源
-	private static final String[] INHERENT_ESCAPE_URIS = { "/index.jsp",
-			"/index.html", "/login.jsp", "/login/doLogin.html",
-			"/register.jsp", "/register.html", "/board/listBoardTopics-",
-			"/board/listTopicPosts-" };
+	private static final String[] INHERENT_ESCAPE_URIS = {  };
 
 	// ② 执行过滤
 	public void doFilter(ServletRequest request, ServletResponse response,
