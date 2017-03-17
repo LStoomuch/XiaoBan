@@ -29,18 +29,23 @@
         <property name="dataSource" ref="dataSource" />
         <property name="hibernateProperties">
             <props>
-                <!-- 指定数据库方言 -->
-                <prop key="hibernate.dialect">
-                    org.hibernate.dialect.MySQLInnoDBDialect
-                </prop>
+                <!-- 制定Hibernate的连接方言 -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
                 <!-- 是否根据需要每次自动创建数据库 -->
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <!-- 显示Hibernate持久化操作所生成的SQL -->
                 <prop key="hibernate.show_sql">true</prop>
                 <!-- 将SQL脚本进行格式化后再输出 -->
                 <prop key="hibernate.format_sql">false</prop>
-
-                <prop key="current_session_context_class">thread</prop>
+                <!-- 开启二级缓存 -->
+                <prop key=" hibernate.cache.use_second_level_cache">true</prop>
+                <!-- 启用查询缓存 -->
+                <prop key=" hibernate.cache.use_query_cache">true</prop>
+                <!-- 配置二级缓存提供商 -->
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <!-- 加载缓存所需配置文件 -->
+                <prop key="hibernate.net.sf.ehcache.configurationResourceName">classpath:ehcache.xml</prop>
+                <prop key="current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
                 <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
             </props>
         </property>

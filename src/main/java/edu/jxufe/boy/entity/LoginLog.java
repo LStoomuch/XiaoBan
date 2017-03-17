@@ -32,7 +32,8 @@ public class LoginLog extends BaseDomain {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
     private User user;
-	
+
+	@Column(name = "ip")
 	private String ip;
 	
 	

@@ -56,11 +56,14 @@ public class User extends BaseDomain {
 	
 	@Column(name = "last_visit")
 	private Date lastVisit;
-    
+
+	@Column(name = "password")
 	private String password;
 
+	@Column(name = "locked")
 	private int locked ;
 
+	@Column(name = "credit")
 	private int credit;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
