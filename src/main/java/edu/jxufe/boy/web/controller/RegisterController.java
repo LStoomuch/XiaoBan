@@ -28,7 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @see
  * @since
  */
-@Controller                   
+@Controller
+@RequestMapping("RegisterController")
 public class RegisterController extends BaseController {
 	/**
 	 * 自动注入

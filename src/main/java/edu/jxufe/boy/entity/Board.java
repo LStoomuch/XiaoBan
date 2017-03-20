@@ -11,7 +11,7 @@ import java.util.Set;
  * Created by liaosheng on 2017/3/15.
  */
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE,region = "fixedRegion")
 @Table(name = "t_board")
 public class Board extends BaseDomain {
 

@@ -37,15 +37,18 @@ public class HomeController {
     public Map Register(User user,String password){
         Map<String,Object> map1 = new HashedMap();
         map1.put("user",user);
-
-
         Map<String,Object> map = new HashedMap();
-        map.put("loginState","1");
+        map.put("loginState","2");
         return map;
     }
 
     @RequestMapping("/registerSuccess")
     public String success(){
         return "success";
+    }
+
+    @RequestMapping("/registerError")
+    public String error(){
+        return "fail";
     }
 }

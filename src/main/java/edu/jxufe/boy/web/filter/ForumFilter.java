@@ -27,39 +27,46 @@ public class ForumFilter implements Filter {
 //			"/board/listTopicPosts-" };
 
 	// ① 不需要登录即可访问的URI资源
-	private static final String[] INHERENT_ESCAPE_URIS = {  };
+	private static final String[] INHERENT_ESCAPE_URIS = {"/homepage","/homepage/toRegister","/homepage/toLogin","/RegisterController"};
 
 	// ② 执行过滤
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
 
 		// ②-1 保证该过滤器在一次请求中只被调用一次
 		if (request != null && request.getAttribute(FILTERED_REQUEST) != null) {
 			chain.doFilter(request, response);
 		} else {
+			String a = httpRequest.getRequestURI();
+			if(a.contains(".css") || a.contains(".js") || a.contains(".png")|| a.contains(".jpg")){
+				//如果发现是css或者js文件，直接放行
+				chain.doFilter(request, response);
+			}else {
 
-			// ②-2 设置过滤标识，防止一次请求多次过滤
-			request.setAttribute(FILTERED_REQUEST, Boolean.TRUE);
-			HttpServletRequest httpRequest = (HttpServletRequest) request;
-			User userContext = getSessionUser(httpRequest);
+				// ②-2 设置过滤标识，防止一次请求多次过滤
+				request.setAttribute(FILTERED_REQUEST, Boolean.TRUE);
 
-			// ②-3 用户未登录, 且当前URI资源需要登录才能访问
-			if (userContext == null
-					&& !isURILogin(httpRequest.getRequestURI(), httpRequest)) {
-				String toUrl = httpRequest.getRequestURL().toString();
-				if (!StringUtils.isEmpty(httpRequest.getQueryString())) {
-					toUrl += "?" + httpRequest.getQueryString();
+				User userContext = getSessionUser(httpRequest);
+
+				// ②-3 用户未登录, 且当前URI资源需要登录才能访问
+				if (userContext == null
+						&& !isURILogin(httpRequest.getRequestURI(), httpRequest)) {
+					String toUrl = httpRequest.getRequestURL().toString();
+					if (!StringUtils.isEmpty(httpRequest.getQueryString())) {
+						toUrl += "?" + httpRequest.getQueryString();
+					}
+
+					// ②-4将用户的请求URL保存在session中，用于登录成功之后，跳到目标URL
+					httpRequest.getSession().setAttribute(LOGIN_TO_URL, toUrl);
+
+					// ②-5转发到登录页面
+					request.getRequestDispatcher("/login.jsp").forward(request,
+							response);
+					return;
 				}
-
-				// ②-4将用户的请求URL保存在session中，用于登录成功之后，跳到目标URL
-				httpRequest.getSession().setAttribute(LOGIN_TO_URL, toUrl);
-
-				// ②-5转发到登录页面
-				request.getRequestDispatcher("/login.jsp").forward(request,
-						response);
-				return;
+				chain.doFilter(request, response);
 			}
-			chain.doFilter(request, response);
 		}
 	}
 
@@ -74,6 +81,7 @@ public class ForumFilter implements Filter {
     * @return
     */
 	private boolean isURILogin(String requestURI, HttpServletRequest request) {
+		String stringURI = request.getContextPath();
 		if (request.getContextPath().equalsIgnoreCase(requestURI)
 				|| (request.getContextPath() + "/").equalsIgnoreCase(requestURI))
 			return true;

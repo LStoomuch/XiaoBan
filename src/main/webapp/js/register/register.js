@@ -1,6 +1,7 @@
 /**
  * Created by liaosheng on 2017/3/14.
  */
+
 $(document).ready(function () {
    $("input#passwordConfirm").blur(function () {
       if($("input#passwordConfirm").val()!=$("input#password").val()){
@@ -11,13 +12,14 @@ $(document).ready(function () {
    });
     $("#registerButton").click(function () {
         var formData = $("#registerForm").serializeArray();
+        var path = getContextPath();
         $.ajax({
             async:true,
             type : "post",
-            url : "/homepage/register",
+            url : path+'/RegisterController/register',
             data:formData,
             dataType:"json",
-            success:function (data) {
+            success:function (data) {debugger
                 if(data.loginState==="1"){
                     layer.alert('见到你真的很高兴', {icon: 6},function () {
                         document.location.href="registerSuccess";
@@ -25,10 +27,19 @@ $(document).ready(function () {
                 }
 
             },
-            error:function (data) {
+            error:function (data) {debugger
                 console.log(data.loginState);
-                window.location="/homepage/registerSuccess";
+                window.location="/homepage/registerError";
             }
         });
     });
 });
+
+function getContextPath() {debugger
+    var curWwwPath = window.document.location.href;
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    var localhostPatht = curWwwPath.substring(0,pos);
+    var projectName = pathName.substring(0,pathName.substr(1).indexOf('/')+1)
+    return (localhostPatht);
+}

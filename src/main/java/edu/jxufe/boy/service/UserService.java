@@ -10,6 +10,7 @@ import edu.jxufe.boy.entity.User;
 import edu.jxufe.boy.exception.UserExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
+@Transactional
 public class UserService {
 	
 	@Autowired
