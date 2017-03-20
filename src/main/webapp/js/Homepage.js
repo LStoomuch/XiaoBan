@@ -15,4 +15,7 @@ function jumpToRegister(){debugger
      // document.location.href="homepage/toRegister";
     window.open('homepage/toRegister');
 }
+function downLogin() {debugger
+    window.open("homepage/downLogin");
+}
 

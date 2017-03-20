@@ -20,12 +20,10 @@ $(document).ready(function () {
             data:formData,
             dataType:"json",
             success:function (data) {debugger
-                if(data.loginState==="1"){
-                    layer.alert('见到你真的很高兴', {icon: 6},function () {
+
+                    layer.alert('注册成功！见到你真的很高兴', {icon: 6},function () {
                         document.location.href="registerSuccess";
                     });
-                }
-
             },
             error:function (data) {debugger
                 console.log(data.loginState);

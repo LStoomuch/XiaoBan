@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="edu.jxufe.boy.entity.User" %>
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
@@ -12,6 +14,9 @@
         }
     </style>
     <link rel='stylesheet' href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <%
+        User USER_CONTEXT = (User) request.getSession().getAttribute("USER_CONTEXT");
+    %>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
@@ -45,12 +50,17 @@
                     </ul>
                 </li>
             </ul>
+            <%if (USER_CONTEXT==null){%>
             <form class="navbar-form navbar-right" role="search">
-
                 <button type="submit" class="btn btn-default" onclick="toLogin();">登录</button>
                 <button onclick="jumpToRegister();return false;" class="btn btn-default ">注册</button>
             </form>
-
+            <%}else if (USER_CONTEXT!=null){%>
+            <form class="navbar-form navbar-right" role="search">
+                <a href="#" style="color: #c7ddef"><c:out value="<%=USER_CONTEXT.getUserName()%>"></c:out></a>&nbsp;&nbsp;
+                <button onclick="downLogin();" class="btn btn-default">注销</button>
+            </form>
+            <%}%>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

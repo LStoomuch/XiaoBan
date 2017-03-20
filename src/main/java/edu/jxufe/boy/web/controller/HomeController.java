@@ -1,5 +1,6 @@
 package edu.jxufe.boy.web.controller;
 
+import edu.jxufe.boy.cons.CommonConstant;
 import edu.jxufe.boy.entity.User;
 
 import org.apache.commons.collections.map.HashedMap;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -18,7 +20,7 @@ public class HomeController {
 
 
     @RequestMapping("")
-    public String getHomePage(){
+    public String getHomePage(HttpServletRequest request){
         return "Homepage/Homepage";
     }
 
@@ -38,7 +40,7 @@ public class HomeController {
         Map<String,Object> map1 = new HashedMap();
         map1.put("user",user);
         Map<String,Object> map = new HashedMap();
-        map.put("loginState","2");
+        map.put("loginState","1");
         return map;
     }
 
@@ -50,5 +52,10 @@ public class HomeController {
     @RequestMapping("/registerError")
     public String error(){
         return "fail";
+    }
+    @RequestMapping("/downLogin")
+    public String downLogin(HttpServletRequest request){
+        request.getSession().setAttribute(CommonConstant.USER_CONTEXT,null);
+        return "Homepage/Homepage";
     }
 }

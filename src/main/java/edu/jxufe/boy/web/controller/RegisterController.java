@@ -13,7 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -46,17 +50,16 @@ public class RegisterController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView register(HttpServletRequest request,User user){
-		ModelAndView view = new ModelAndView();
-		view.setViewName("/success");
+	@ResponseBody
+	public Map register(HttpServletRequest request, User user){
+		Map map = new HashMap();
 		try {
 			userService.register(user);
 		} catch (UserExistException e) {
-			view.addObject("errorMsg", "用户名已经存在，请选择其它的名字。");
-			view.setViewName("forward:/register.jsp");
+			map.put("errorMsg", "用户名已经存在，请选择其它的名字。");
 		}
 		setSessionUser(request,user);
-		return view;
+		return map;
 	}
 	
 }
