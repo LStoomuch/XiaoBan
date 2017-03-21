@@ -26,22 +26,12 @@ public class HomeController {
 
     @RequestMapping("/toLogin")
     public String toLogin(){
-        return "login/login   11/27 12/27 1/27 2/27 3/27 4/27 5/27 ";
+        return "login/login";
     }
 
     @RequestMapping("/toRegister")
     public String toRegister(){
         return "register/register";
-    }
-
-    @RequestMapping("/register")
-    @ResponseBody
-    public Map Register(User user,String password){
-        Map<String,Object> map1 = new HashedMap();
-        map1.put("user",user);
-        Map<String,Object> map = new HashedMap();
-        map.put("loginState","1");
-        return map;
     }
 
     @RequestMapping("/registerSuccess")

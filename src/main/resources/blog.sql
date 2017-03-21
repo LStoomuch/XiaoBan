@@ -84,7 +84,7 @@ CREATE TABLE `t_login_log` (
   `login_log_id` int(11) NOT NULL auto_increment,
   `user_id` int(11) default NULL,
   `ip` varchar(30) NOT NULL default '',
-  `login_datetime` varchar(14) NOT NULL,
+  `login_datetime` varchar(30) NOT NULL,
   PRIMARY KEY  (`login_log_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

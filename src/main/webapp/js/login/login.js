@@ -12,8 +12,13 @@ $(document).ready(function () {
             type:"post",
             data:formData,
             dataType:"json",
-            success:function () {
-                alert("login success");
+            success:function (data) {
+                layer.alert('登陆成功！见到你真的很高兴', {icon: 6},function () {
+                    if(data.toURL!=null){
+
+                    }
+                    document.location.href=getContextPath()+"/homepage";
+                });
             },
             error:function () {
                 alert("login error");
