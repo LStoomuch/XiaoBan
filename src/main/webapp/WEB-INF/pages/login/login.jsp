@@ -5,8 +5,9 @@
   Time: 11:18
   To change this template use File | Settings | File Templates.
 --%>
+<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="zh-cn">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,17 +18,21 @@
 <body>
 <div class="container">
     <h2>Login</h2>
-    <form role="form" action="/homepage/login" method="post">
+    <form role="form" id="loginForm">
         <div class="form-group">
-            <label for="email">账号:</label>
-            <input type="text" class="form-control" name="email" id="email" placeholder="账号">
+            <label for="userName">账号:</label>
+            <input type="text" class="form-control" name="userName" id="userName" placeholder="账号">
         </div>
         <div class="form-group">
             <label for="password">密码:</label>
             <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
         </div>
-        <button type="submit" class="btn btn-default">登陆</button>
+        <button type="button" id="loginButton" class="btn btn-default">登陆</button>
     </form>
 </div>
+<script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
+<script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+<script src="../../../js/pub/layer/layer.js"></script>
+<script src="../../../js/login/login.js"></script>
 </body>
 </html>

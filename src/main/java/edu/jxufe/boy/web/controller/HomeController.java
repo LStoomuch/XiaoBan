@@ -26,7 +26,7 @@ public class HomeController {
 
     @RequestMapping("/toLogin")
     public String toLogin(){
-        return "login/login";
+        return "login/login   11/27 12/27 1/27 2/27 3/27 4/27 5/27 ";
     }
 
     @RequestMapping("/toRegister")
@@ -53,6 +53,7 @@ public class HomeController {
     public String error(){
         return "fail";
     }
+
     @RequestMapping("/downLogin")
     public String downLogin(HttpServletRequest request){
         request.getSession().setAttribute(CommonConstant.USER_CONTEXT,null);

@@ -27,7 +27,7 @@ public class ForumFilter implements Filter {
 //			"/board/listTopicPosts-" };
 
 	// ① 不需要登录即可访问的URI资源
-	private static final String[] INHERENT_ESCAPE_URIS = {"/homepage","/RegisterController"};
+	private static final String[] INHERENT_ESCAPE_URIS = {"/homepage","/RegisterController","/login"};
 
 	// ② 执行过滤
 	public void doFilter(ServletRequest request, ServletResponse response,
