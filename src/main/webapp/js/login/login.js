@@ -4,8 +4,9 @@
 
 $(document).ready(function () {
     $("#loginButton").click(function () {
-        var url = getContextPath()+'/login/doLogin'
+        var url = getContextPath()+'/login/doLogin';
         var formData = $("#loginForm").serializeArray();
+        var loginFlag = 1;
         $.ajax({
            async:false,
             url:url,
@@ -13,18 +14,59 @@ $(document).ready(function () {
             data:formData,
             dataType:"json",
             success:function (data) {
-                layer.alert('登陆成功！见到你真的很高兴', {icon: 6},function () {
-                    if(data.toURL!=null){
+               if (data.stat==0){
+                   Messenger().post({
+                       message: data.errorMsg,
+                       type: "error"
+                   });
+               }else if(data.stat==1) {
+                   Messenger().post({
+                       message: "登陆成功！",
+                       type: "success"
+                   });
+                   layer.msg('登陆成功!', {time: 3000, icon:6},function () {
+                       if (data.toURL != null) {
 
-                    }
-                    document.location.href=getContextPath()+"/homepage";
-                });
+                       }
+                       document.location.href = getContextPath() + "/homepage";
+                   });
+                   // layer.alert('登陆成功！见到你真的很高兴', {icon: 6}, function () {
+                   //     if (data.toURL != null) {
+                   //
+                   //     }
+                   //     document.location.href = getContextPath() + "/homepage";
+                   // });
+               }
             },
             error:function () {
-                alert("login error");
+                Messenger().post({
+                    message: "服务器异常！",
+                    type: "error"
+                });
             }
         });
     });
+
+    $("#password").click(function (e) {
+        $("#allContainer").css({
+                "background-image": "url(../../images/inputPassword.jpg)"
+                // "background-size":"cover"
+            }
+        );
+        // $("#allContainer").css(
+        //     "background","#fff"
+        // )
+        $(document).one("click",function () {
+            if($(this).id!="allContainer") {
+                $("#allContainer").css(
+                    "background", "#fff"
+                );
+            }
+        });
+        e.stopPropagation();
+    });
+
+
 });
 function getContextPath() {
     var curWwwPath = window.document.location.href;

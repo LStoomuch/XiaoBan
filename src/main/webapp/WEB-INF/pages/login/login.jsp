@@ -14,9 +14,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>登陆</title>
     <link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/messenger.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/messenger-theme-future.css">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
 </head>
 <body>
-<div class="container">
+
+<div class="container" id="allContainer">
     <h2>Login</h2>
     <form role="form" id="loginForm">
         <div class="form-group">
@@ -29,10 +35,12 @@
         </div>
         <button type="button" id="loginButton" class="btn btn-default">登陆</button>
     </form>
+
 </div>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 <script src="../../../js/pub/layer/layer.js"></script>
+<script src="../../../js/pub/messenger.min.js"></script>
 <script src="../../../js/login/login.js"></script>
 </body>
 </html>

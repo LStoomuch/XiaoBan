@@ -51,11 +51,15 @@ public class LoginController extends BaseController {
 	public Map login(HttpServletRequest request, User user) {
 		User dbUser = userService.getUserByUserName(user.getUserName());
 		Map map = new HashMap();
+		map.put("stat",1);
 		if (dbUser == null) {
+			map.put("stat",0);
 			map.put("errorMsg", "用户名不存在");
 		} else if (!dbUser.getPassword().equals(user.getPassword())) {
+			map.put("stat",0);
 			map.put("errorMsg", "用户密码不正确");
 		} else if (dbUser.getLocked() == User.USER_LOCK) {
+			map.put("stat",0);
 			map.put("errorMsg", "用户已经被锁定，不能登录。");
 		} else {
 			dbUser.setLastIp(request.getRemoteAddr());
@@ -81,7 +85,7 @@ public class LoginController extends BaseController {
 	@RequestMapping("/doLogout")
 	public String logout(HttpSession session) {
 		session.removeAttribute(CommonConstant.USER_CONTEXT);
-		return "forward:/index.jsp";
+		return "redirect:/homepage";
 	}
 
 }

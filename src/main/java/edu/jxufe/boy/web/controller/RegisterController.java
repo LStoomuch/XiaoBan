@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -59,6 +60,24 @@ public class RegisterController extends BaseController {
 			map.put("errorMsg", "用户名已经存在，请选择其它的名字。");
 		}
 		setSessionUser(request,user);
+		return map;
+	}
+
+	@RequestMapping("check_userName")
+	@ResponseBody
+	public Map register(@RequestParam(value = "userName",required = false) String userName){
+		Map map = new HashMap();
+		map.put("Msg",0);
+		try{
+			if (userName!=null&&userName!=""){
+				User user1 = userService.getUserByUserName(userName);
+				if (user1==null)
+					map.put("Msg",0);	//用户不存在
+				else map.put("Msg",1);		//用户存在
+			}
+		}catch (Exception e){
+			map.put("Msg",2);  //异常
+		}
 		return map;
 	}
 	

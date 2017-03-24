@@ -23,8 +23,12 @@ function jumpToRegister(){debugger
      // document.location.href="homepage/toRegister";
     window.open('homepage/toRegister');
 }
-function downLogin() {debugger
-    var url = getContextPath()+"/homepage/downLogin";
-    window.location.href = url;
+function doLogout() {debugger
+    var url = getContextPath()+"/login/doLogout";
+    $.ajax({
+        async:true,
+        url:url,
+        type:"get",
+    });
 }
 

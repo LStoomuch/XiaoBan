@@ -14,6 +14,9 @@
         }
     </style>
     <link rel='stylesheet' href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
     <%
         User USER_CONTEXT = (User) request.getSession().getAttribute("USER_CONTEXT");
     %>
@@ -58,12 +61,32 @@
             <%}else if (USER_CONTEXT!=null){%>
             <form class="navbar-form navbar-right" role="search">
                 <a href="#" style="color: #c7ddef"><c:out value="<%=USER_CONTEXT.getUserName()%>"></c:out></a>&nbsp;&nbsp;
-                <button onclick="downLogin();" class="btn btn-default">注销</button>
+                <button onclick="doLogout();" class="btn btn-default">注销</button>
             </form>
             <%}%>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<div id="example">asdas</div>
+<script type="text/babel">
+    var Counter = React.createClass({
+        getInitialState: function () {
+            return { clickCount: 0 };
+        },
+        handleClick: function () {
+            this.setState(function(state) {
+                return {clickCount: state.clickCount + 1};
+            });
+        },
+        render: function () {
+            return (<p onClick={this.handleClick}>点我！点击次数为: {this.state.clickCount}</p>);
+        }
+    });
+    ReactDOM.render(
+            <Counter />,
+        document.getElementById('example')
+    );
+</script>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 <script src="../../../js/Homepage.js"></script>
