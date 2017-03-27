@@ -4,65 +4,96 @@
 var path = getContextPath();
 $(document).ready(function () {
    $("input#passwordConfirm").blur(function () {
-      if($("input#passwordConfirm").val()!=$("input#password").val()){
-          // layer.msg('请确认密码', function(){
-          //       $("input#passwordConfirm").focus();
-          // });
-          layer.tips('两次密码不相同，请确认一哈~', '#passwordConfirm',{tips:1});
-      }
+       checkPassword();
    });
-    $("#registerButton").click(function () {
-        if($("input#passwordConfirm").val()!=$("input#password").val()){
-            layer.tips('两次密码不相同，请确认一哈~', '#passwordConfirm',{tips:1});
-            return;
-        }
-        var formData = $("#registerForm").serializeArray();
-        var path = getContextPath();
-        $.ajax({
-            async:true,
-            type : "post",
-            url : path+'/RegisterController/register',
-            data:formData,
-            dataType:"json",
-            success:function (data) {debugger
-                    if (data.errorMsg==1){
-                        layer.tips('用户名已经存在，请选择其它的名字。', '#userName', {tips: 1});
-                        return;
-                    }
-                    layer.alert('注册成功！见到你真的很高兴', {icon: 6},function () {
-                        document.location.href="registerSuccess";
-                    });
-            },
-            error:function (data) {debugger
-                console.log(data.loginState);
-                window.location="/homepage/registerError";
-            }
-        });
+    $("input#userName").blur(function () {debugger
+        var flag = checkUserName();
     });
-    $("#userName").blur(function () {
-        var userName = $("#userName").val();
-        if(userName!=null&&userName!="") {
-            $.ajax({
-                async: true,
-                type: "post",
-                url: path + '/RegisterController/check_userName',
-                data: {"userName":userName},
-                dataType: "json",
-                success: function (data) {
-                    if (data.Msg == 1) {
-                        layer.tips('该账号已存在~', '#userName', {tips: 1});
-                    }
-                },
-                error: function (data) {
-                    if (data.Msg == 2){
-                        layer.msg("服务异常");
-                    }
-                }
-            });
+    $("#registerButton").click(function () {debugger
+        var flag2 = checkPassword();
+        if(flag2==1){
+            register();
+        }
+    });
+    $('#registerForm').keydown(function(e){
+        if(e.keyCode==13){
+            if(checkPassword==1)
+            register();
         }
     });
 });
-
+function register() {
+    var formData = $("#registerForm").serializeArray();
+    var path = getContextPath();
+    $.ajax({
+        async:true,
+        type : "post",
+        url : path+'/RegisterController/register',
+        data:formData,
+        dataType:"json",
+        success:function (data) {
+            if (data.errorMsg==1){
+                layer.tips('用户名已经存在，请选择其它的名字。', '#userName', {tips: 1});
+                return;
+            }
+            if (data.errorMsg==2){
+                layer.tips('用户名或密码非法', '#userName', {tips: 1});
+                return;
+            }
+            layer.alert('注册成功！见到你真的很高兴', {icon: 6},function () {
+                document.location.href="registerSuccess";
+            });
+        },
+        error:function (data) {
+            console.log(data.loginState);
+            window.location="/homepage/registerError";
+        }
+    });
+}
+function checkPassword() {debugger
+    var msg = null;
+    var flag = 1;
+    if($("input#passwordConfirm").val()!=$("input#password").val()){
+        msg = '两次密码不相同，请确认一哈~';
+        flag = 0;
+    }
+    if($("input#password").val()==''||$("input#password").val()==null){
+        msg = '密码输入为空!!';
+        flag = 0;
+    }
+    if(msg!=null) {
+        layer.tips(msg, '#passwordConfirm', {tips: 1});
+    }
+    return flag;
+}
+function checkUserName() {
+    var userName = $("#userName").val();
+    var flag =  0;
+    if(userName==null||userName==""){
+        layer.tips("用户名不允许为空", '#userName',{tips:1});
+    }else if(userName!=null&&userName!=""){
+        $.ajax({
+            async: true,
+            type: "post",
+            url: path + '/RegisterController/check_userName',
+            data: {"userName":userName},
+            dataType: "json",
+            success: function (data) {debugger
+                if (data.Msg == 1) {
+                    layer.tips('该账号已存在~', '#userName', {tips: 1});
+                    flag = 0;
+                }else flag = 1;
+            },
+            error: function (data) {debugger
+                if (data.Msg == 2){
+                    layer.msg("服务异常");
+                }
+                flag = 0;
+            }
+        });
+    }
+    return flag;
+}
 function getContextPath() {
     var curWwwPath = window.document.location.href;
     var pathName = window.document.location.pathname;

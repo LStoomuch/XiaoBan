@@ -55,12 +55,16 @@ public class RegisterController extends BaseController {
 	public Map register(HttpServletRequest request, User user){
 		Map map = new HashMap();
 		try {
+            if(user.getUserName().equals("")||user.getUserName()==null||user.getPassword().equals("")||user.getPassword()==null)
+                throw new Exception();
 			userService.register(user);
 		} catch (UserExistException e) {
 			map.put("errorMsg",1);
 			return map;
-		}
-		setSessionUser(request,user);
+		} catch (Exception e) {
+            map.put("errorMsg",2);//用户名或密码非法
+        }
+        setSessionUser(request,user);
 		return map;
 	}
 
