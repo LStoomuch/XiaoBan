@@ -5,6 +5,9 @@
 package edu.jxufe.boy.web.controller;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.View;
 
 
 /**
@@ -40,10 +43,19 @@ import org.springframework.web.servlet.ModelAndView;
  * @since
  */
 @Controller
+@RequestMapping("BoardManage")
 public class BoardManageController extends BaseController {
 	@Autowired
 	private ForumService forumService;
 
+	@RequestMapping("showAllBoard")
+	public ModelAndView showAllBoard(){
+		List<Board> boards = forumService.getAllBoards();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("boards",boards);
+		modelAndView.setViewName("Board/Board");
+		return modelAndView;
+	}
 	/**
 	 * 列出论坛模块下的主题帖子
 	 * 

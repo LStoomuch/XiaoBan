@@ -32,7 +32,7 @@
             <label for="passwordConfirm">确认密码:</label>
             <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" placeholder="确认密码">
         </div>
-        <button type="button" class="btn btn-default" id="registerButton">注册</button>
+        <button type="button" class="btn btn-lg btn-primary btn-block" id="registerButton">注册</button>
     </form>
 </div>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>

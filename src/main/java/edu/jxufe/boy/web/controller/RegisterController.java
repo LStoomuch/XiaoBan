@@ -57,7 +57,8 @@ public class RegisterController extends BaseController {
 		try {
 			userService.register(user);
 		} catch (UserExistException e) {
-			map.put("errorMsg", "用户名已经存在，请选择其它的名字。");
+			map.put("errorMsg",1);
+			return map;
 		}
 		setSessionUser(request,user);
 		return map;

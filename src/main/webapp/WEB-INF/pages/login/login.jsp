@@ -19,23 +19,32 @@
     <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
     <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
     <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        .col-center-block {
+            float: none;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container" id="allContainer">
-    <h2>Login</h2>
-    <form role="form" id="loginForm">
+    <div class="row myCenter">
+        <div class="col-xs-6 col-md-4 col-center-block">
+        <form class="form-signin" role="form" id="loginForm">
+    <h2 class="form-signin-heading">Login</h2>
         <div class="form-group">
-            <label for="userName">账号:</label>
             <input type="text" class="form-control" name="userName" id="userName" placeholder="账号">
         </div>
         <div class="form-group">
-            <label for="password">密码:</label>
             <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
         </div>
-        <button type="button" id="loginButton" class="btn btn-default">登陆</button>
+        <button type="button" id="loginButton" class="btn btn-lg btn-primary btn-block">登陆</button>
     </form>
-
+        </div>
+    </div>
 </div>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>

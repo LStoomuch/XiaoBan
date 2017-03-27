@@ -22,7 +22,6 @@ public class ForumService {
 	@Autowired
 	private PostDao postDao;
 	
-	
 
 	/**
 	 * 发表一个主题帖子,用户积分加10，论坛版块的主题帖数加1
@@ -145,7 +144,8 @@ public class ForumService {
      * @return
      */
     public List<Board> getAllBoards(){
-        return boardDao.loadAll();
+    	List<Board> boards = boardDao.loadAll();
+        return boards;
     }	
 	
 	/**

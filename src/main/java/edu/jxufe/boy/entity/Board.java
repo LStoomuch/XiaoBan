@@ -30,7 +30,7 @@ public class Board extends BaseDomain {
     private int topicNum ;
 
     @Column(name = "deleteflag")
-    private int deleteflag;
+    private int deleteFlag;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "manBoards", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<User>();
@@ -75,6 +75,11 @@ public class Board extends BaseDomain {
         this.users = users;
     }
 
+    public int getDeleteFlag() {
+        return deleteFlag;
+    }
 
-
+    public void setDeleteFlag(int deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
 }

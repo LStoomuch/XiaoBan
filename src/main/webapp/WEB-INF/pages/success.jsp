@@ -18,7 +18,7 @@
     <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
     <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
     <script>
-        function getContextPath() {debugger
+        function getContextPath() {
             var curWwwPath = window.document.location.href;
             var pathName = window.document.location.pathname;
             var pos = curWwwPath.indexOf(pathName);
@@ -27,7 +27,7 @@
             return (localhostPatht);
         }
         var time = 0 ;
-        $(document).ready(function () {debugger
+        $(document).ready(function () {
             setInterval(function () {
                 if(time<10000) {
                     $("p#msg").html("将在" + ((10000-time) / 1000) + "秒后回到首页");
@@ -45,6 +45,7 @@
 <div class="container">
     <h4>注册成功！</h4>
     <p id="msg"></p>
+    <a onclick="document.location.href='/homepage'">立即返回首页</a>
 </div>
 
 </body>

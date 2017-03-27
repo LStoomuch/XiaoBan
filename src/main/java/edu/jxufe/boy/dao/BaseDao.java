@@ -57,7 +57,8 @@ public class BaseDao<T>{
 	 * @return
 	 */
 	public List<T> loadAll() {
-		return getHibernateTemplate().loadAll(entityClass);
+		List list = getHibernateTemplate().loadAll(entityClass);
+		return list;
 	}
 	
 	/**

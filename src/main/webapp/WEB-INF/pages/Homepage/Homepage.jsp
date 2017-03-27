@@ -22,7 +22,8 @@
     %>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse " role="navigation" >
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -55,7 +56,7 @@
             </ul>
             <%if (USER_CONTEXT==null){%>
             <form class="navbar-form navbar-right" role="search">
-                <button type="submit" class="btn btn-default" onclick="toLogin();">登录</button>
+                <button type="submit" class="btn btn-default" onclick="toLogin();return false;">登录</button>
                 <button onclick="jumpToRegister();return false;" class="btn btn-default ">注册</button>
             </form>
             <%}else if (USER_CONTEXT!=null){%>
@@ -67,6 +68,62 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<div class="container" id="container2"></div>
+<div class="container">
+    <blockquote>
+        <p>
+            这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+        </p>
+    </blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote><blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote>
+</div>
 <div id="example">asdas</div>
 <script type="text/babel">
     var Counter = React.createClass({

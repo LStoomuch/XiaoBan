@@ -25,7 +25,10 @@ $(document).ready(function () {
             data:formData,
             dataType:"json",
             success:function (data) {debugger
-
+                    if (data.errorMsg==1){
+                        layer.tips('用户名已经存在，请选择其它的名字。', '#userName', {tips: 1});
+                        return;
+                    }
                     layer.alert('注册成功！见到你真的很高兴', {icon: 6},function () {
                         document.location.href="registerSuccess";
                     });
@@ -36,7 +39,7 @@ $(document).ready(function () {
             }
         });
     });
-    $("#userName").blur(function () {debugger
+    $("#userName").blur(function () {
         var userName = $("#userName").val();
         if(userName!=null&&userName!="") {
             $.ajax({
@@ -60,7 +63,7 @@ $(document).ready(function () {
     });
 });
 
-function getContextPath() {debugger
+function getContextPath() {
     var curWwwPath = window.document.location.href;
     var pathName = window.document.location.pathname;
     var pos = curWwwPath.indexOf(pathName);

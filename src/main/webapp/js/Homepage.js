@@ -17,13 +17,13 @@ function getContextPath() {
     return (localhostPatht);
 }
 function toLogin() {
-    window.open('homepage/toLogin');
+    window.location.href="homepage/toLogin";
 }
-function jumpToRegister(){debugger
+function jumpToRegister(){
      // document.location.href="homepage/toRegister";
-    window.open('homepage/toRegister');
+    window.location.href="homepage/toRegister";
 }
-function doLogout() {debugger
+function doLogout() {
     var url = getContextPath()+"/login/doLogout";
     $.ajax({
         async:true,
@@ -31,4 +31,15 @@ function doLogout() {debugger
         type:"get",
     });
 }
+$(document).ready(function () {debugger
+    var url = getContextPath()+"/BoardManage/showAllBoard"
+    $.ajax({
+        async:true,
+        url:url,
+        type:"get",
+        success:function (html) {
+            $("#container2").html(html);
+        }
+    })
+})
 
