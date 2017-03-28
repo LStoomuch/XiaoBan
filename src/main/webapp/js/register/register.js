@@ -6,10 +6,10 @@ $(document).ready(function () {
    $("input#passwordConfirm").blur(function () {
        checkPassword();
    });
-    $("input#userName").blur(function () {debugger
+    $("input#userName").blur(function () {
         var flag = checkUserName();
     });
-    $("#registerButton").click(function () {debugger
+    $("#registerButton").click(function () {
         var flag2 = checkPassword();
         if(flag2==1){
             register();

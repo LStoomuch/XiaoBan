@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>个人博客</title>
+    <title></title>
     <style type="text/css">
         body{
             padding-top: 70px;
@@ -23,9 +23,9 @@
 <body>
 <c:forEach items="${boards}" var="board">
     <blockquote>
-        <h4>
-            <a href="BoardManage/board/listBoardTopics-${board.boardId}">${board.boardName}</a>
-        </h4>
+        <h3>
+            <a href="BoardManage/board/loadBoardTopicsPage-${board.boardId}">${board.boardName}</a>
+        </h3>
         <p>帖子数目：${board.topicNum}</p>
     </blockquote>
 </c:forEach>

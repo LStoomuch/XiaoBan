@@ -48,12 +48,25 @@ public class BoardManageController extends BaseController {
 	@Autowired
 	private ForumService forumService;
 
+	/**
+	 * 列出论坛所有模块
+	 *
+	 * @return
+	 */
 	@RequestMapping("showAllBoard")
 	public ModelAndView showAllBoard(){
 		List<Board> boards = forumService.getAllBoards();
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("boards",boards);
 		modelAndView.setViewName("Board/Board");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/board/loadBoardTopicsPage-{boardId}", method = RequestMethod.GET)
+	public ModelAndView loadBoardTopicsPage(@PathVariable Integer boardId){
+		ModelAndView modelAndView = new ModelAndView();
+		Board board = forumService.getBoardById(boardId);
+		modelAndView.addObject("board",board);
+		modelAndView.setViewName("BoardTopic/BoardTopic");
 		return modelAndView;
 	}
 	/**
@@ -72,7 +85,7 @@ public class BoardManageController extends BaseController {
 				CommonConstant.PAGE_SIZE);
 		view.addObject("board", board);
 		view.addObject("pagedTopic", pagedTopic);
-		view.setViewName("/listBoardTopics");
+		view.setViewName("/BoardTopic/TopicContainer");
 		return view;
 	}
 

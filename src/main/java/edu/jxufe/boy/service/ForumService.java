@@ -154,7 +154,8 @@ public class ForumService {
 	 * @return
 	 */
     public Page getPagedTopics(int boardId, int pageNo, int pageSize){
-		return topicDao.getPagedTopics(boardId,pageNo,pageSize);
+    	Page page = topicDao.getPagedTopics(boardId,pageNo,pageSize);
+		return page;
     }
     
     /**

@@ -14,9 +14,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>注册</title>
     <link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <style>
+        .col-center-block {
+            float: none;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 
 <body>
+
 <div class="container">
     <h2>Register</h2>
     <form role="form" id="registerForm">
@@ -35,6 +44,7 @@
         <button type="button" class="btn btn-lg btn-primary btn-block" id="registerButton">注册</button>
     </form>
 </div>
+
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 <script src="../../../js/pub/layer/layer.js"></script>

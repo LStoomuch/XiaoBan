@@ -9,9 +9,10 @@ import java.util.regex.Pattern;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.util.Assert;
 
@@ -22,6 +23,8 @@ public class BaseDao<T>{
 	private Class<T> entityClass;
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
+	@Autowired
+	private SessionFactory sessionFactory;
 	/**
 	 * 通过反射获取子类确定的泛型类
 	 */
@@ -202,7 +205,8 @@ public class BaseDao<T>{
 		this.hibernateTemplate = hibernateTemplate;
 	}
     public  Session getSession() {
-        return SessionFactoryUtils.getSession(hibernateTemplate.getSessionFactory(),true);
+		return sessionFactory.getCurrentSession();
+//        return SessionFactoryUtils.(hibernateTemplate.getSessionFactory(),true);
     }
 	
 }
