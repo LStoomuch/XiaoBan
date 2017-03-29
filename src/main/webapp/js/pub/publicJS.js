@@ -25,7 +25,7 @@ function doLogout() {
     });
 }
 function showTopPage() {
-    var url_showTopPage = getContextPath()+"/homepage/showTopPage";
+    var url_showTopPage = getContextPath()+"/homepage/TopPage";
     $.ajax({
         async:true,
         url:url_showTopPage,
@@ -36,7 +36,7 @@ function showTopPage() {
     });
 }
 function showAllBoard() {
-    var url_showAllBoard = getContextPath()+"/BoardManage/showAllBoard";
+    var url_showAllBoard = getContextPath()+"/BoardManage/AllBoards";
     $.ajax({
         async:true,
         url:url_showAllBoard,
@@ -55,6 +55,18 @@ function showAllTopic() {
         type:"get",
         success:function (html) {
             $("#topicContainer").html(html);
+        }
+    });
+}
+function showAllPost() {
+    var topicId = $("#topicId").val();
+    var url_showAllPost = getContextPath()+"/BoardManage/board/listTopicPosts-"+topicId;
+    $.ajax({
+        async:true,
+        url:url_showAllPost,
+        type:"get",
+        success:function (html) {
+            $("#postContainer").html(html);
         }
     });
 }

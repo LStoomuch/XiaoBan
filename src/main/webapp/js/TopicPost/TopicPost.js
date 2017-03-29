@@ -1,7 +1,7 @@
 /**
- * Created by liaosheng on 2017/3/28.
+ * Created by liaos on 2017/3/29.
  */
 $(document).ready(function () {
-    showAllTopic();
+    showAllPost();
     showTopPage();
 })

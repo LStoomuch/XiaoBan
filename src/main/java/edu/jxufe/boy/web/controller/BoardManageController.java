@@ -5,12 +5,9 @@
 package edu.jxufe.boy.web.controller;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import edu.jxufe.boy.cons.CommonConstant;
 import edu.jxufe.boy.dao.Page;
@@ -26,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 
 /**
@@ -53,12 +49,12 @@ public class BoardManageController extends BaseController {
 	 *
 	 * @return
 	 */
-	@RequestMapping("showAllBoard")
+	@RequestMapping("AllBoards")
 	public ModelAndView showAllBoard(){
 		List<Board> boards = forumService.getAllBoards();
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("boards",boards);
-		modelAndView.setViewName("Board/Board");
+		modelAndView.setViewName("Board/BoardContainer");
 		return modelAndView;
 	}
 	@RequestMapping(value = "/board/loadBoardTopicsPage-{boardId}", method = RequestMethod.GET)
@@ -123,6 +119,15 @@ public class BoardManageController extends BaseController {
 		return "redirect:"+targetUrl;
 	}
 
+	@RequestMapping(value = "/board/loadTopicPostPage-{topicId}", method = RequestMethod.GET)
+	public ModelAndView loadTopicPostPage(@PathVariable Integer topicId){
+		ModelAndView modelAndView = new ModelAndView();
+		Topic topic = forumService.getTopicByTopicId(topicId);
+		modelAndView.setViewName("TopicPost/TopicPost");
+		modelAndView.addObject("topic",topic);
+		return modelAndView;
+	}
+
 	/**
 	 * 列出主题的所有帖子
 	 * 
@@ -140,7 +145,7 @@ public class BoardManageController extends BaseController {
 		// 为回复帖子表单准备数据
 		view.addObject("topic", topic);
 		view.addObject("pagedPost", pagedPost);
-		view.setViewName("/listTopicPosts");
+		view.setViewName("/TopicPost/PostContainer");
 		return view;
 	}
 

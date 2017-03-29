@@ -25,7 +25,7 @@ public class HomeController {
         return "Homepage/Homepage";
     }
 
-    @RequestMapping("showTopPage")
+    @RequestMapping("TopPage")
     public ModelAndView showTopPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("public/headPage");

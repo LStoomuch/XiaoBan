@@ -24,7 +24,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "t_post")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "post_type", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("1")
+@DiscriminatorValue("2")
 public class Post extends BaseDomain {
 	
 	@Id

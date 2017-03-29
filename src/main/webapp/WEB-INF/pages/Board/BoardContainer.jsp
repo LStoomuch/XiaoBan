@@ -26,10 +26,11 @@
         <h3>
             <a href="BoardManage/board/loadBoardTopicsPage-${board.boardId}">${board.boardName}</a>
         </h3>
+        <p>${board.boardDesc}</p>
         <p>帖子数目：${board.topicNum}</p>
     </blockquote>
 </c:forEach>
-Board Pages
+
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 </body>

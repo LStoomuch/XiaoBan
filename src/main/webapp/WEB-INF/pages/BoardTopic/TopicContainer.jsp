@@ -15,6 +15,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
+    <style type="text/css">
+        body{
+            padding-top: 70px;
+        }
+    </style>
     <link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <%
         Page pageTopic = (Page) request.getAttribute("pagedTopic");
@@ -33,15 +38,16 @@
         <c:if test="${USER_CONTEXT.userType == 2 || isboardManager}">
             <input type="checkbox" name="topicIds" value="${topic.topicId}"/>
         </c:if>
-
-        <a  href="<c:url value="/board/listTopicPosts-${topic.topicId}.html"/>">
-            <c:if test="${topic.digest > 0}">
-                <font color=red>★</font>
-            </c:if>
+        <h4  class="bg-success">
+        <a  href="<c:url value="/BoardManage/board/loadTopicPostPage-${topic.topicId}"/>">
                 ${topic.topicTitle}
+                    <c:if test="${topic.digest > 0}">
+                        <font color=red>★</font>
+                    </c:if>
         </a>
-            ${topic.user.userName}
-            ${topic.replies}
+        </h4>
+            <p >发起人：${topic.user.userName}</p>
+            <p>评论数：${topic.replies}</p>
             <%--<td>--%>
             <%--<fmt:formatDate pattern="yyyy-MM-dd HH:mm"--%>
             <%--value="${topic.createTime}" />--%>

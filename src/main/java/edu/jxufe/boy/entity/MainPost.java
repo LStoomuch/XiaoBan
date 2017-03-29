@@ -29,7 +29,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "post_type", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("2")
+@DiscriminatorValue("1")
 public class MainPost extends Post {
 
 }
