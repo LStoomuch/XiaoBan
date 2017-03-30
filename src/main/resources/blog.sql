@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2017-03-30 15:04:15
+Date: 2017-03-30 17:43:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,7 +72,7 @@ CREATE TABLE `t_login_log` (
   PRIMARY KEY (`login_log_id`),
   KEY `FK_9ewx8t59gl5pyoxtw467a4phv` (`user_id`),
   CONSTRAINT `FK_9ewx8t59gl5pyoxtw467a4phv` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_login_log
@@ -88,6 +88,7 @@ INSERT INTO `t_login_log` VALUES ('8', '4', '0:0:0:0:0:0:0:1', '2017-03-25 15:31
 INSERT INTO `t_login_log` VALUES ('10', '4', '0:0:0:0:0:0:0:1', '2017-03-28 22:57:43.478', '0');
 INSERT INTO `t_login_log` VALUES ('11', '4', '0:0:0:0:0:0:0:1', '2017-03-29 23:24:52.654', '0');
 INSERT INTO `t_login_log` VALUES ('12', '4', '0:0:0:0:0:0:0:1', '2017-03-29 23:26:50.052', '0');
+INSERT INTO `t_login_log` VALUES ('13', '4', '127.0.0.1', '2017-03-30 15:15:24.835', '0');
 
 -- ----------------------------
 -- Table structure for t_post
@@ -108,7 +109,7 @@ CREATE TABLE `t_post` (
   KEY `FK_s8ds9wudctcypjgvid4ln3nnp` (`user_id`),
   CONSTRAINT `FK_s8ds9wudctcypjgvid4ln3nnp` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`user_id`),
   CONSTRAINT `FK_t3iu1n5uayjh585r182qgimwm` FOREIGN KEY (`topic_id`) REFERENCES `t_topic` (`topic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='帖子';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='帖子';
 
 -- ----------------------------
 -- Records of t_post
@@ -125,7 +126,10 @@ INSERT INTO `t_post` VALUES ('21', '1', '21', '1', '1', '炉石传说', '测试�
 INSERT INTO `t_post` VALUES ('22', '1', '22', '1', '1', '炉石传说', '测试。。。。', '2011-09-18 00:00:00', '0');
 INSERT INTO `t_post` VALUES ('23', '1', '23', '1', '1', '炉石传说', '测试。。。。', '2011-09-18 00:00:00', '0');
 INSERT INTO `t_post` VALUES ('24', '1', '1', '1', '2', '炉石传说', '测试。。。。', '2011-09-18 00:00:00', '0');
-INSERT INTO `t_post` VALUES ('25', '1', '1', '4', '2', '炉石传说', '哈哈哈哈', '2017-03-30 10:44:51', '0');
+INSERT INTO `t_post` VALUES ('25', '1', '1', '4', '2', '炉石传说', '哈哈哈哈3', '2017-03-30 10:44:51', '0');
+INSERT INTO `t_post` VALUES ('26', '1', '1', '4', '2', '炉石传说', '哈哈哈哈1', '2017-03-30 08:44:51', '0');
+INSERT INTO `t_post` VALUES ('27', '1', '1', '4', '2', '炉石传说', '哈哈哈哈2', '2017-03-30 10:44:48', '0');
+INSERT INTO `t_post` VALUES ('28', '1', '1', '4', '2', '炉石传说', '哈哈哈哈4', '2017-03-30 16:44:48', '0');
 
 -- ----------------------------
 -- Table structure for t_topic
@@ -188,7 +192,7 @@ CREATE TABLE `t_user` (
 INSERT INTO `t_user` VALUES ('1', 'tom', '1234', '1', '1', '205', null, null);
 INSERT INTO `t_user` VALUES ('2', 'john', '1234', '2', '1', '10', null, null);
 INSERT INTO `t_user` VALUES ('3', 'ggg', '123123', '1', '0', '110', null, null);
-INSERT INTO `t_user` VALUES ('4', '廖晟', '123456', '1', '0', '150', '2017-03-29 23:26:38', '0:0:0:0:0:0:0:1');
+INSERT INTO `t_user` VALUES ('4', '廖晟', '123456', '1', '0', '155', '2017-03-30 15:15:25', '127.0.0.1');
 INSERT INTO `t_user` VALUES ('5', '王预', '123456', '1', '0', '100', null, null);
 INSERT INTO `t_user` VALUES ('6', '廖晟2', '123456', '1', '0', '100', null, null);
 INSERT INTO `t_user` VALUES ('7', '廖晟3', '123456', '1', '0', '100', null, null);
