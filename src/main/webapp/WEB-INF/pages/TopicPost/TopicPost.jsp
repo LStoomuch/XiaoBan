@@ -18,10 +18,10 @@
     <link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
 <body>
-<input id="topicId" style="display:none;" value="${topic.boardId}"/>
+<input id="topicId" style="display:none;" value="${topic.topicId}"/>
 <div id="topPage"></div>        <!-- 顶部导航栏-->
 <div class="container" id="postContainer"></div>     <!--中部 主贴和回复贴列表-->
-
+<div class="container" id="addPostContainer"></div>     <!--底部添加回复区-->
 
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>

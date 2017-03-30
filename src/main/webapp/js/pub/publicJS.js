@@ -46,9 +46,15 @@ function showAllBoard() {
         }
     });
 }
-function showAllTopic() {
+function showAllTopic(pageNum) {
     var boardId = $("#boardId").val();
-    var url_showAllTopic = getContextPath()+"/BoardManage/board/listBoardTopics-"+boardId;
+    var url_showAllTopic;
+    if(pageNum==null){
+        url_showAllTopic = getContextPath()+"/BoardManage/board/listBoardTopics-"+boardId;
+    }else{
+        url_showAllTopic = getContextPath()+"/BoardManage/board/listBoardTopics-"+boardId+"?pageNo="+pageNum;
+    }
+
     $.ajax({
         async:true,
         url:url_showAllTopic,
@@ -58,14 +64,19 @@ function showAllTopic() {
         }
     });
 }
-function showAllPost() {
+function showAllPost(pageNum) {debugger
     var topicId = $("#topicId").val();
-    var url_showAllPost = getContextPath()+"/BoardManage/board/listTopicPosts-"+topicId;
+    var url_showAllPost;
+    if (pageNum==null){
+        url_showAllPost = getContextPath()+"/BoardManage/board/listTopicPosts-"+topicId;
+    }else{
+        url_showAllPost = getContextPath()+"/BoardManage/board/listTopicPosts-"+topicId+"?pageNo="+pageNum;
+    }
     $.ajax({
         async:true,
         url:url_showAllPost,
         type:"get",
-        success:function (html) {
+        success:function (html) {debugger
             $("#postContainer").html(html);
         }
     });

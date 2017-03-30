@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="edu.jxufe.boy.dao.Page" %>
-<%@ page import="edu.jxufe.boy.entity.Post" %><%--
+<%@ page import="edu.jxufe.boy.entity.Post" %>
+<%--
   Created by IntelliJ IDEA.
   User: liaos
   Date: 2017/3/29
@@ -25,28 +26,55 @@
     <%
         Page pagedPost = (Page) request.getAttribute("pagedPost");
         List postList = pagedPost.getResult();
+        Post post = null;
         if (postList!=null){
-            Post post = (Post) postList.get(0);
+             post = (Post) postList.get(0);
         }
     %>
 </head>
 <body>
+
+<tr>
+    <h2 class="bg-success">${topic.topicTitle}</h2>
+</tr>
 <c:forEach var="post" items="${pagedPost.result}">
-    <tr>
-        <td>${post.postTitle}</td>
-    </tr>
-    <tr>
-        <td width="20%">
-            用户：${post.user.userName}<br>
-            积分：${post.user.credit}<br>
-        <td>${post.postText}</td>
-    </tr>
+    <blockquote>
+    ${post.postText}
+
+        <p> 用户：${post.user.userName}</p>
+        <p>积分：${post.user.credit}</p>
+    </blockquote>
+    <% if (postList.size()==1){%>
+    <blockquote>
+        <p>评论区是空滴~~</p>
+    </blockquote>
+    <%}%>
 </c:forEach>
-<% if (postList.size()==1){%>
-<blockquote>
-    <p>评论区是空滴~~</p>
-</blockquote>
-<%}%>
+
+<div align="center">
+    <ul  class="pagination">
+        <% if (!pagedPost.isHasPreviousPage()){ %>
+        <li class="disabled"><a href="#">&laquo;上一页</a></li>
+        <%}else{%>
+        <li><a onclick="showAllPost(<%=(pagedPost.getCurrentPageNo()-1)%>)" href="#">&laquo;上一页</a></li>
+        <%}%>
+
+        <%for(long pageNumber = 1;pageNumber<=pagedPost.getTotalPageCount();pageNumber++){%>
+        <% if(pageNumber==pagedPost.getCurrentPageNo()){ %>
+        <li class="active"><a onclick="showAllPost(<%=pageNumber%>)" href="#"><%=pageNumber%></a></li>
+        <% }else{ %>
+        <li ><a onclick="showAllPost(<%=pageNumber%>)" href="#"><%=pageNumber%></a></li>
+        <%}%>
+        <%}%>
+
+        <% if(!pagedPost.isHasNextPage()){%>
+        <li class="disabled"><a href="#">下一页&raquo;</a></li>
+        <% }else{ %>
+        <li><a onclick="showAllPost(<%=(pagedPost.getCurrentPageNo()+1)%>)" href="#">下一页&raquo;</a></li>
+        <% } %>
+    </ul>
+</div>
+
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 </body>

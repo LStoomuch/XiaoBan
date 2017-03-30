@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PostDao extends BaseDao<Post> {
 	
-	protected final String GET_PAGED_POSTS = "from Post where topic.topicId =? order by createTime desc"; 
+	protected final String GET_PAGED_POSTS = "from Post where topic.topicId =? order by createTime ";
 
 	protected final String DELETE_TOPIC_POSTS = "delete from Post where topic.topicId=?";
 	

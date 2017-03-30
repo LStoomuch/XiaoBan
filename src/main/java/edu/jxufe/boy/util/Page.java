@@ -10,119 +10,101 @@ import java.util.ArrayList;
  *
  */
 public class Page<T> implements Serializable {
+    // 结果集
+    private List list;
 
-    private static int DEFAULT_PAGE_SIZE = 20;
+    // 查询记录总数
+    private int totalRecords;
 
-    private int pageSize = DEFAULT_PAGE_SIZE; // 每页的记录数
+    // 每页多少条记录
+    private int pageSize;
 
-    private long start; // 当前页第一条数据在List中的位置,从0开始
-
-    private List<T> data; // 当前页中存放的记录,类型一般为List
-
-    private long totalCount; // 总记录数
+    // 第几页
+    private int pageNo;
 
     /**
-     * 构造方法，只构造空页.
-     */
-    public Page() {
-        this(0, 0, DEFAULT_PAGE_SIZE, new ArrayList());
+     * @return 总页数
+     * */
+    public int getTotalPages(){
+        return (totalRecords+pageSize-1)/pageSize;
     }
 
     /**
-     * 默认构造方法.
-     *
-     * @param start	 本页数据在数据库中的起始位置
-     * @param totalSize 数据库中总记录条数
-     * @param pageSize  本页容量
-     * @param data	  本页包含的数据
+     * 计算当前页开始记录
+     * @param pageSize 每页记录数
+     * @param currentPage 当前第几页
+     * @return 当前页开始记录号
      */
-    public Page(long start, long totalSize, int pageSize, List data) {
-        this.pageSize = pageSize;
-        this.start = start;
-        this.totalCount = totalSize;
-        this.data = data;
+    public int countOffset(int currentPage,int pageSize){
+        int offset = pageSize*(currentPage-1);
+        return offset;
     }
 
     /**
-     * 取总记录数.
-     */
-    public long getTotalCount() {
-        return this.totalCount;
+     * @return 首页
+     * */
+    public int getTopPageNo(){
+        return 1;
     }
 
     /**
-     * 取总页数.
-     */
-    public long getTotalPageCount() {
-        if (totalCount % pageSize == 0)
-            return totalCount / pageSize;
-        else
-            return totalCount / pageSize + 1;
+     * @return 上一页
+     * */
+    public int getPreviousPageNo(){
+        if(pageNo<=1){
+            return 1;
+        }
+        return pageNo-1;
     }
 
     /**
-     * 取每页数据容量.
-     */
+     * @return 下一页
+     * */
+    public int getNextPageNo(){
+        if(pageNo>=getBottomPageNo()){
+            return getBottomPageNo();
+        }
+        return pageNo+1;
+    }
+
+    /**
+     * @return 尾页
+     * */
+    public int getBottomPageNo(){
+        return getTotalPages();
+    }
+
+
+    public List getList() {
+        return list;
+    }
+
+    public void setList(List list) {
+        this.list = list;
+    }
+
+    public int getTotalRecords() {
+        return totalRecords;
+    }
+
+    public void setTotalRecords(int totalRecords) {
+        this.totalRecords = totalRecords;
+    }
+
     public int getPageSize() {
         return pageSize;
     }
 
-    /**
-     * 取当前页中的记录.
-     */
-    public List<T> getResult() {
-        return data;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
-    /**
-     * 取该页当前页码,页码从1开始.
-     */
-    public long getCurrentPageNo() {
-        return start / pageSize + 1;
+    public int getPageNo() {
+        return pageNo;
     }
 
-    /**
-     * 该页是否有下一页.
-     */
-    public boolean isHasNextPage() {
-        return this.getCurrentPageNo() < this.getTotalPageCount();
+    public void setPageNo(int pageNo) {
+        this.pageNo = pageNo;
     }
 
-    /**
-     * 该页是否有上一页.
-     */
-    public boolean isHasPreviousPage() {
-        return this.getCurrentPageNo() > 1;
-    }
-
-    /**
-     * 获取任一页第一条数据在数据集的位置，每页条数使用默认值.
-     *
-     * @see #getStartOfPage(int,int)
-     */
-    protected static int getStartOfPage(int pageNo) {
-        return getStartOfPage(pageNo, DEFAULT_PAGE_SIZE);
-    }
-
-    /**
-     * 获取任一页第一条数据在数据集的位置.
-     *
-     * @param pageNo   从1开始的页号
-     * @param pageSize 每页记录条数
-     * @return 该页第一条数据
-     */
-    public static int getStartOfPage(int pageNo, int pageSize) {
-        return (pageNo - 1) * pageSize;
-    }
-
-    @Override
-    public String toString() {
-        return "Page{" +
-                "pageSize=" + pageSize +
-                "currentPageNo="+getCurrentPageNo()+
-                ", start=" + start +
-                ", data=" + data +
-                ", totalCount=" + totalCount +
-                '}';
-    }
 }

@@ -38,7 +38,7 @@
         <c:if test="${USER_CONTEXT.userType == 2 || isboardManager}">
             <input type="checkbox" name="topicIds" value="${topic.topicId}"/>
         </c:if>
-        <h4  class="bg-success">
+        <h4 >
         <a  href="<c:url value="/BoardManage/board/loadTopicPostPage-${topic.topicId}"/>">
                 ${topic.topicTitle}
                     <c:if test="${topic.digest > 0}">
@@ -59,6 +59,29 @@
     </blockquote>
 </c:forEach>
 <%}%>
+<div align="center">
+<ul  class="pagination">
+    <% if (!pageTopic.isHasPreviousPage()){ %>
+        <li class="disabled"><a href="#">&laquo;上一页</a></li>
+    <%}else{%>
+        <li><a onclick="showAllTopic(<%=(pageTopic.getCurrentPageNo()-1)%>)" href="#">&laquo;上一页</a></li>
+    <%}%>
+
+    <%for(long pageNumber = 1;pageNumber<=pageTopic.getTotalPageCount();pageNumber++){%>
+        <% if(pageNumber==pageTopic.getCurrentPageNo()){ %>
+            <li class="active"><a onclick="showAllTopic(<%=pageNumber%>)" href="#"><%=pageNumber%></a></li>
+        <% }else{ %>
+            <li ><a onclick="showAllTopic(<%=pageNumber%>)" href="#"><%=pageNumber%></a></li>
+        <%}%>
+    <%}%>
+
+    <% if(!pageTopic.isHasNextPage()){%>
+        <li class="disabled"><a href="#">下一页&raquo;</a></li>
+    <% }else{ %>
+        <li><a onclick="showAllTopic(<%=(pageTopic.getCurrentPageNo()+1)%>)" href="#">下一页&raquo;</a></li>
+    <% } %>
+</ul>
+</div>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 </body>

@@ -21,7 +21,7 @@
 <input id="boardId" style="display:none;" value="${board.boardId}"/>
 <div id="topPage"></div>        <!-- 顶部导航栏-->
 <div class="container" id="topicContainer"></div>     <!--中部 帖子列表-->
-
+<p id="test">1</p>
 
 
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
