@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="edu.jxufe.boy.dao.Page" %>
 <%@ page import="edu.jxufe.boy.entity.Post" %>
+<%@ page import="edu.jxufe.boy.entity.User" %>
 <%--
   Created by IntelliJ IDEA.
   User: liaos
@@ -30,12 +31,13 @@
         if (postList!=null){
              post = (Post) postList.get(0);
         }
+        User user = (User) session.getAttribute("USER_CONTEXT");
     %>
 </head>
 <body>
 
 <tr>
-    <h2 class="bg-success">${topic.topicTitle}</h2>
+    <h3 class="bg-success">${topic.topicTitle}</h3>
 </tr>
 <c:forEach var="post" items="${pagedPost.result}">
     <blockquote>
@@ -74,8 +76,25 @@
         <% } %>
     </ul>
 </div>
-
+<form class="form-group" id="addPostForm">
+    <%if(user==null){%>
+    <div class="form-group">
+        <textarea style="height: 70px" class="form-control" rows="3" onclick="askForLogin();"></textarea>
+    </div>
+    <div class="form-group">
+        <button type="button" id="addPostButton"  class="btn btn-lg btn-primary btn-block" onclick="askForLogin();">回复</button>
+    </div>
+    <%}else{%>
+    <div class="form-group">
+        <textarea class="form-control" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <button type="button" onclick="addPost();" class="btn btn-lg btn-primary btn-block">回复</button>
+    </div>
+    <%}%>
+</form>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+
 </body>
 </html>
