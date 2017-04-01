@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.util.Assert;
@@ -25,6 +26,8 @@ public class BaseDao<T>{
 	private HibernateTemplate hibernateTemplate;
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	/**
 	 * 通过反射获取子类确定的泛型类
 	 */
@@ -71,6 +74,10 @@ public class BaseDao<T>{
 	 */
 	public void save(T entity) {
 		getHibernateTemplate().save(entity);
+	}
+
+	public void update(String sql,Object[] objects){
+		jdbcTemplate.update(sql,objects);
 	}
 
 	/**

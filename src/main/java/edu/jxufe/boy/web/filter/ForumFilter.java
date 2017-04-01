@@ -27,7 +27,8 @@ public class ForumFilter implements Filter {
 //			"/board/listTopicPosts-" };
 
 	// ① 不需要登录即可访问的URI资源
-	private static final String[] INHERENT_ESCAPE_URIS = {"/homepage","/RegisterController","/login","/BoardManage"};
+	private static final String[] INHERENT_ESCAPE_URIS = {"/homepage","/RegisterController","/login","/BoardManage/AllBoards","/BoardManage/board/loadBoardTopicsPage-","/BoardManage/board/listBoardTopics-",
+			"/BoardManage/board/loadTopicPostPage-","/BoardManage/board/listTopicPosts-"};
 
 	// ② 执行过滤
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -61,7 +62,7 @@ public class ForumFilter implements Filter {
 					httpRequest.getSession().setAttribute(LOGIN_TO_URL, toUrl);
 
 					// ②-5转发到登录页面
-					request.getRequestDispatcher("/login.jsp").forward(request,
+					request.getRequestDispatcher("/login").forward(request,
 							response);
 					return;
 				}

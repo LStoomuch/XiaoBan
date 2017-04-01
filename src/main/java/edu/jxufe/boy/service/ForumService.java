@@ -73,6 +73,8 @@ public class ForumService {
 	 * @param post
 	 */
 	public void addPost(Post post){
+		if(post.getPostTitle()==null) post.setPostTitle("");
+
 		postDao.save(post);
 		
 		User user = post.getUser();
@@ -236,6 +238,11 @@ public class ForumService {
 	 */
 	public void updatePost(Post post){
 		postDao.update(post);
+	}
+
+	public void update(Object[] objects){
+		String sql = "";
+		postDao.update(sql,objects);
 	}
 	
 }

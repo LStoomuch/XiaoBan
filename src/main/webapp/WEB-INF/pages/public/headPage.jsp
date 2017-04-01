@@ -40,7 +40,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="disabled"><a href="#">业务功能</a></li>
-                        <li><a href="#">信息建立</a></li>
+                        <li><a href="#" onclick="layer.open({
+  type: 1,
+  skin: '开发中', //样式类名
+  closeBtn: 0, //不显示关闭按钮
+  anim: 2,
+  shadeClose: true, //开启遮罩关闭
+  content: '该功能正在开发中'
+});">信息建立</a></li>
                         <li><a href="#">信息查询</a></li>
                         <li><a href="#">信息管理</a></li>
                         <li class="divider"></li>

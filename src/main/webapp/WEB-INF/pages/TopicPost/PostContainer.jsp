@@ -2,6 +2,8 @@
 <%@ page import="edu.jxufe.boy.dao.Page" %>
 <%@ page import="edu.jxufe.boy.entity.Post" %>
 <%@ page import="edu.jxufe.boy.entity.User" %>
+<%@ page import="edu.jxufe.boy.entity.MainPost" %>
+<%@ page import="edu.jxufe.boy.cons.CommonConstant" %>
 <%--
   Created by IntelliJ IDEA.
   User: liaos
@@ -22,14 +24,20 @@
         body{
             padding-top: 70px;
         }
+        blockquote p {
+
+        }
+        .userInfo{
+            font-size: 8px;
+        }
     </style>
     <link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <%
         Page pagedPost = (Page) request.getAttribute("pagedPost");
-        List postList = pagedPost.getResult();
+        List<Post> postList = pagedPost.getResult();
         Post post = null;
         if (postList!=null){
-             post = (Post) postList.get(0);
+             post =  postList.get(0);
         }
         User user = (User) session.getAttribute("USER_CONTEXT");
     %>
@@ -39,19 +47,28 @@
 <tr>
     <h3 class="bg-success">${topic.topicTitle}</h3>
 </tr>
-<c:forEach var="post" items="${pagedPost.result}">
-    <blockquote>
-    ${post.postText}
 
-        <p> 用户：${post.user.userName}</p>
-        <p>积分：${post.user.credit}</p>
+<%for (int i = 0;i<postList.size();i++){%>
+    <blockquote>
+        <p class="postText"><%=postList.get(i).getPostText()%></p>
+        <p class="userInfo">
+            <%if (postList.get(i) instanceof MainPost){%>
+                楼主：
+            <%}else{%>
+                <%=(pagedPost.getCurrentPageNo()-1)* pagedPost.getPageSize()+i%>楼
+            <%}%>
+            <a href="#" onclick="alert('功能开发中')"><%=postList.get(i).getUser().getUserName()%></a>
+         &nbsp;积分：<%=postList.get(i).getUser().getCredit()%>
+        </p>
     </blockquote>
-    <% if (postList.size()==1){%>
+    <% if (postList.size()==1&&postList.get(i) instanceof MainPost){%>
     <blockquote>
         <p>评论区是空滴~~</p>
     </blockquote>
     <%}%>
-</c:forEach>
+
+    <%}%>
+
 
 <div align="center">
     <ul  class="pagination">
@@ -63,7 +80,7 @@
 
         <%for(long pageNumber = 1;pageNumber<=pagedPost.getTotalPageCount();pageNumber++){%>
         <% if(pageNumber==pagedPost.getCurrentPageNo()){ %>
-        <li class="active"><a onclick="showAllPost(<%=pageNumber%>)" href="#"><%=pageNumber%></a></li>
+        <li class="active"><a onclick="showAllPost(<%=pageNumber%>)" href="#" id="currentPage"><%=pageNumber%></a></li>
         <% }else{ %>
         <li ><a onclick="showAllPost(<%=pageNumber%>)" href="#"><%=pageNumber%></a></li>
         <%}%>
@@ -79,14 +96,16 @@
 <form class="form-group" id="addPostForm">
     <%if(user==null){%>
     <div class="form-group">
-        <textarea style="height: 70px" class="form-control" rows="3" onclick="askForLogin();"></textarea>
+        <textarea style="height: 70px" class="form-control" rows="3"  onclick="askForLogin();"></textarea>
     </div>
     <div class="form-group">
         <button type="button" id="addPostButton"  class="btn btn-lg btn-primary btn-block" onclick="askForLogin();">回复</button>
     </div>
     <%}else{%>
+    <input type="hidden" ID="topic.topicId" name="topic.topicId" value="${topic.topicId}">
+    <input type="hidden" ID="boardId" name="boardId" value="${topic.boardId}">
     <div class="form-group">
-        <textarea class="form-control" rows="3"></textarea>
+        <textarea class="form-control" rows="3" id="postText" name="postText"></textarea>
     </div>
     <div class="form-group">
         <button type="button" onclick="addPost();" class="btn btn-lg btn-primary btn-block">回复</button>

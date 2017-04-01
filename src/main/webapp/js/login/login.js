@@ -55,11 +55,13 @@ function login(){
                     message: "登陆成功！",
                     type: "success"
                 });
-                layer.msg('登陆成功!', {time: 3000, icon:6},function () {
+                layer.msg('登陆成功!', {time: 3000, icon:6},function () {debugger
                     if (data.toURL != null) {
-
+                        document.location.href = data.toURL;
+                    }else{
+                        document.location.href = getContextPath() + "/homepage";
                     }
-                    document.location.href = getContextPath() + "/homepage";
+
                 });
             }
         },

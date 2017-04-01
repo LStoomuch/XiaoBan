@@ -5,7 +5,9 @@
 package edu.jxufe.boy.web.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,11 +19,9 @@ import edu.jxufe.boy.entity.Topic;
 import edu.jxufe.boy.entity.User;
 import edu.jxufe.boy.service.ForumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -77,7 +77,7 @@ public class BoardManageController extends BaseController {
 		ModelAndView view =new ModelAndView();
 		Board board = forumService.getBoardById(boardId);
 		pageNo = pageNo==null?1:pageNo;
-		Page pagedTopic = forumService.getPagedTopics(boardId, pageNo,
+		Page<Topic> pagedTopic = forumService.getPagedTopics(boardId, pageNo,
 				CommonConstant.PAGE_SIZE);
 		view.addObject("board", board);
 		view.addObject("pagedTopic", pagedTopic);
@@ -85,19 +85,6 @@ public class BoardManageController extends BaseController {
 		return view;
 	}
 
-	/**
-	 * 添加主题帖页面
-	 * 
-	 * @param boardId
-	 * @return
-	 */
-	@RequestMapping(value = "/board/addTopicPage-{boardId}", method = RequestMethod.GET)
-	public ModelAndView addTopicPage(@PathVariable Integer boardId) {
-		ModelAndView view =new ModelAndView();
-		view.addObject("boardId", boardId);
-		view.setViewName("/addTopic");
-		return view;
-	}
 
 	/**
 	 * 添加一个主题帖
@@ -119,6 +106,11 @@ public class BoardManageController extends BaseController {
 		return "redirect:"+targetUrl;
 	}
 
+	/**
+	 * 加载帖子内容页面
+	 * @param topicId
+	 * @return
+	 */
 	@RequestMapping(value = "/board/loadTopicPostPage-{topicId}", method = RequestMethod.GET)
 	public ModelAndView loadTopicPostPage(@PathVariable Integer topicId){
 		ModelAndView modelAndView = new ModelAndView();
@@ -129,7 +121,7 @@ public class BoardManageController extends BaseController {
 	}
 
 	/**
-	 * 列出主题的所有帖子
+	 * 列出楼主的主题和所有的回复
 	 * 
 	 * @param topicId
 	 * @param pageNo
@@ -140,7 +132,7 @@ public class BoardManageController extends BaseController {
 		ModelAndView view =new ModelAndView();
 		Topic topic = forumService.getTopicByTopicId(topicId);
 		pageNo = pageNo==null?1:pageNo;
-		Page pagedPost = forumService.getPagedPosts(topicId, pageNo,
+		Page<Post> pagedPost = forumService.getPagedPosts(topicId, pageNo,
 				CommonConstant.PAGE_SIZE);
 		// 为回复帖子表单准备数据
 		view.addObject("topic", topic);
@@ -156,14 +148,15 @@ public class BoardManageController extends BaseController {
 	 * @param post
 	 * @return
 	 */
-	@RequestMapping(value = "/board/addPost")
-	public String addPost(HttpServletRequest request, Post post) {
+	@RequestMapping(value = "/board/Post",method = RequestMethod.POST)
+	@ResponseBody
+	public Map addPost(HttpServletRequest request, Post post,@RequestParam(required = false,value = "currentPage") String currentPage) {
 		post.setCreateTime(new Date());
 		post.setUser(getSessionUser(request));
 		forumService.addPost(post);
-		String targetUrl = "/board/listTopicPosts-"
-				+ post.getTopic().getTopicId() + ".html";
-		return "redirect:"+targetUrl;
+		Map map = new HashMap();
+		map.put("currentPage",currentPage);
+		return map;
 	}
 
 	/**

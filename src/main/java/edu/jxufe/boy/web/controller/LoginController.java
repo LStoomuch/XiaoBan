@@ -66,13 +66,17 @@ public class LoginController extends BaseController {
 			dbUser.setLastVisit(new Date());
 			userService.loginSuccess(dbUser);
 			setSessionUser(request,dbUser);
-			String toUrl = (String)request.getSession().getAttribute(CommonConstant.LOGIN_TO_URL);
-			request.getSession().removeAttribute(CommonConstant.LOGIN_TO_URL);
-			//如果当前会话中没有保存登录之前的请求URL，则直接跳转到主页
-			if(StringUtils.isEmpty(toUrl)){
-				toUrl = "/Homepage/homepage";
+			String url = request.getRequestURL().toString();
+			if (!StringUtils.isEmpty(request.getQueryString())) {
+				url += "?" + request.getQueryString();
 			}
-			map.put("toURL",toUrl);
+//			String toUrl = (String)request.getSession().getAttribute(CommonConstant.LOGIN_TO_URL);
+//			request.getSession().removeAttribute(CommonConstant.LOGIN_TO_URL);
+//			//如果当前会话中没有保存登录之前的请求URL，则直接跳转到主页
+//			if(StringUtils.isEmpty(toUrl)){
+//				toUrl = "/Homepage/homepage";
+//			}
+			map.put("toURL",url);
 		}
 		return map;
 	}
