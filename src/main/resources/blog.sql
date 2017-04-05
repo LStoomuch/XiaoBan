@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2017-03-30 17:43:45
+Date: 2017-04-05 15:21:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `t_board` (
 -- Records of t_board
 -- ----------------------------
 INSERT INTO `t_board` VALUES ('1', '炉石传说', '我们玩炉石，靠的是技术', '8', '0');
-INSERT INTO `t_board` VALUES ('2', '\r\n刀塔', '刀狗装逼讨论区', '0', '0');
+INSERT INTO `t_board` VALUES ('2', '\r\n刀塔', '刀塔er讨论区', '0', '0');
 INSERT INTO `t_board` VALUES ('3', '守望先锋', '有基佬拉我裤链', '0', '0');
 INSERT INTO `t_board` VALUES ('4', '魔兽世界', '为了部落', '3', '0');
 INSERT INTO `t_board` VALUES ('7', '英雄联盟', '面对疾风吧', '0', '0');
@@ -72,7 +72,7 @@ CREATE TABLE `t_login_log` (
   PRIMARY KEY (`login_log_id`),
   KEY `FK_9ewx8t59gl5pyoxtw467a4phv` (`user_id`),
   CONSTRAINT `FK_9ewx8t59gl5pyoxtw467a4phv` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_login_log
@@ -89,6 +89,44 @@ INSERT INTO `t_login_log` VALUES ('10', '4', '0:0:0:0:0:0:0:1', '2017-03-28 22:5
 INSERT INTO `t_login_log` VALUES ('11', '4', '0:0:0:0:0:0:0:1', '2017-03-29 23:24:52.654', '0');
 INSERT INTO `t_login_log` VALUES ('12', '4', '0:0:0:0:0:0:0:1', '2017-03-29 23:26:50.052', '0');
 INSERT INTO `t_login_log` VALUES ('13', '4', '127.0.0.1', '2017-03-30 15:15:24.835', '0');
+INSERT INTO `t_login_log` VALUES ('14', '4', '127.0.0.1', '2017-03-31 10:56:23.481', '0');
+INSERT INTO `t_login_log` VALUES ('15', '4', '127.0.0.1', '2017-04-01 09:28:51.968', '0');
+INSERT INTO `t_login_log` VALUES ('16', '4', '127.0.0.1', '2017-04-01 10:08:19.284', '0');
+INSERT INTO `t_login_log` VALUES ('17', '4', '127.0.0.1', '2017-04-01 10:46:49.748', '0');
+INSERT INTO `t_login_log` VALUES ('18', '4', '127.0.0.1', '2017-04-01 11:27:15.73', '0');
+INSERT INTO `t_login_log` VALUES ('19', '5', '127.0.0.1', '2017-04-01 14:36:48.179', '0');
+INSERT INTO `t_login_log` VALUES ('20', '4', '127.0.0.1', '2017-04-01 14:45:20.117', '0');
+INSERT INTO `t_login_log` VALUES ('21', '4', '127.0.0.1', '2017-04-01 15:20:51.307', '0');
+INSERT INTO `t_login_log` VALUES ('22', '4', '127.0.0.1', '2017-04-01 15:34:44.175', '0');
+INSERT INTO `t_login_log` VALUES ('23', '4', '127.0.0.1', '2017-04-01 15:43:01.277', '0');
+INSERT INTO `t_login_log` VALUES ('24', '4', '127.0.0.1', '2017-04-01 15:55:56.27', '0');
+INSERT INTO `t_login_log` VALUES ('25', '4', '127.0.0.1', '2017-04-01 15:56:27.225', '0');
+INSERT INTO `t_login_log` VALUES ('26', '4', '127.0.0.1', '2017-04-01 15:56:56.925', '0');
+INSERT INTO `t_login_log` VALUES ('27', '4', '127.0.0.1', '2017-04-01 16:22:21.682', '0');
+INSERT INTO `t_login_log` VALUES ('28', '4', '127.0.0.1', '2017-04-01 16:23:00.946', '0');
+INSERT INTO `t_login_log` VALUES ('29', '4', '127.0.0.1', '2017-04-05 08:41:49.949', '0');
+INSERT INTO `t_login_log` VALUES ('30', '4', '127.0.0.1', '2017-04-05 08:58:41.157', '0');
+INSERT INTO `t_login_log` VALUES ('31', '4', '127.0.0.1', '2017-04-05 08:59:45.026', '0');
+INSERT INTO `t_login_log` VALUES ('32', '4', '127.0.0.1', '2017-04-05 11:26:25.809', '0');
+INSERT INTO `t_login_log` VALUES ('33', '4', '127.0.0.1', '2017-04-05 11:27:40.434', '0');
+INSERT INTO `t_login_log` VALUES ('34', '4', '127.0.0.1', '2017-04-05 11:29:56.494', '0');
+INSERT INTO `t_login_log` VALUES ('35', '4', '127.0.0.1', '2017-04-05 11:32:26.679', '0');
+INSERT INTO `t_login_log` VALUES ('36', '4', '127.0.0.1', '2017-04-05 11:32:53.28', '0');
+INSERT INTO `t_login_log` VALUES ('37', '4', '127.0.0.1', '2017-04-05 11:40:23.076', '0');
+INSERT INTO `t_login_log` VALUES ('38', '4', '127.0.0.1', '2017-04-05 11:57:47.333', '0');
+INSERT INTO `t_login_log` VALUES ('39', '4', '127.0.0.1', '2017-04-05 11:58:12.908', '0');
+INSERT INTO `t_login_log` VALUES ('40', '4', '127.0.0.1', '2017-04-05 11:59:47.872', '0');
+INSERT INTO `t_login_log` VALUES ('41', '4', '127.0.0.1', '2017-04-05 13:54:52.454', '0');
+INSERT INTO `t_login_log` VALUES ('42', '4', '127.0.0.1', '2017-04-05 13:55:23.521', '0');
+INSERT INTO `t_login_log` VALUES ('43', '4', '127.0.0.1', '2017-04-05 13:56:26.348', '0');
+INSERT INTO `t_login_log` VALUES ('44', '4', '127.0.0.1', '2017-04-05 13:58:10.274', '0');
+INSERT INTO `t_login_log` VALUES ('45', '4', '127.0.0.1', '2017-04-05 14:09:08.358', '0');
+INSERT INTO `t_login_log` VALUES ('46', '4', '127.0.0.1', '2017-04-05 14:13:30.206', '0');
+INSERT INTO `t_login_log` VALUES ('47', '4', '127.0.0.1', '2017-04-05 14:17:30.379', '0');
+INSERT INTO `t_login_log` VALUES ('48', '4', '127.0.0.1', '2017-04-05 14:18:42.415', '0');
+INSERT INTO `t_login_log` VALUES ('49', '4', '127.0.0.1', '2017-04-05 14:19:46.721', '0');
+INSERT INTO `t_login_log` VALUES ('50', '4', '127.0.0.1', '2017-04-05 14:21:01.489', '0');
+INSERT INTO `t_login_log` VALUES ('51', '4', '127.0.0.1', '2017-04-05 14:21:44.221', '0');
 
 -- ----------------------------
 -- Table structure for t_post
@@ -109,7 +147,7 @@ CREATE TABLE `t_post` (
   KEY `FK_s8ds9wudctcypjgvid4ln3nnp` (`user_id`),
   CONSTRAINT `FK_s8ds9wudctcypjgvid4ln3nnp` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`user_id`),
   CONSTRAINT `FK_t3iu1n5uayjh585r182qgimwm` FOREIGN KEY (`topic_id`) REFERENCES `t_topic` (`topic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='帖子';
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COMMENT='帖子';
 
 -- ----------------------------
 -- Records of t_post
@@ -130,6 +168,23 @@ INSERT INTO `t_post` VALUES ('25', '1', '1', '4', '2', '炉石传说', '哈哈�
 INSERT INTO `t_post` VALUES ('26', '1', '1', '4', '2', '炉石传说', '哈哈哈哈1', '2017-03-30 08:44:51', '0');
 INSERT INTO `t_post` VALUES ('27', '1', '1', '4', '2', '炉石传说', '哈哈哈哈2', '2017-03-30 10:44:48', '0');
 INSERT INTO `t_post` VALUES ('28', '1', '1', '4', '2', '炉石传说', '哈哈哈哈4', '2017-03-30 16:44:48', '0');
+INSERT INTO `t_post` VALUES ('29', '1', '23', '4', '2', '', '很强', '2017-04-01 11:28:48', '0');
+INSERT INTO `t_post` VALUES ('30', '1', '23', '5', '2', '', '怒抢二楼', '2017-04-01 14:37:32', '0');
+INSERT INTO `t_post` VALUES ('31', '1', '23', '4', '2', '', '二楼的妹子你好啊', '2017-04-01 14:45:58', '0');
+INSERT INTO `t_post` VALUES ('32', '1', '23', '4', '2', '', '我应该是4楼', '2017-04-01 14:47:32', '0');
+INSERT INTO `t_post` VALUES ('33', '1', '23', '4', '2', '', '我是炉石萌新', '2017-04-01 14:49:42', '0');
+INSERT INTO `t_post` VALUES ('34', '1', '23', '4', '2', '', '有人一起玩吗', '2017-04-01 14:50:34', '0');
+INSERT INTO `t_post` VALUES ('35', '1', '23', '4', '2', '', '没有，滚', '2017-04-01 14:53:36', '0');
+INSERT INTO `t_post` VALUES ('36', '1', '23', '4', '2', '', '没有，滚！！', '2017-04-01 14:59:31', '0');
+INSERT INTO `t_post` VALUES ('37', '1', '23', '4', '2', '', '没有，滚！！', '2017-04-01 14:59:41', '0');
+INSERT INTO `t_post` VALUES ('38', '1', '23', '4', '2', '', '我是十楼', '2017-04-01 15:21:49', '0');
+INSERT INTO `t_post` VALUES ('39', '1', '23', '4', '2', '', '我是十一楼', '2017-04-01 15:27:15', '0');
+INSERT INTO `t_post` VALUES ('40', '1', '23', '4', '2', '', '我是十二楼', '2017-04-01 15:27:54', '0');
+INSERT INTO `t_post` VALUES ('41', '1', '23', '4', '2', '', '我是十三楼', '2017-04-01 15:29:53', '0');
+INSERT INTO `t_post` VALUES ('42', '1', '23', '4', '2', '', '我是十四楼', '2017-04-01 15:43:37', '0');
+INSERT INTO `t_post` VALUES ('43', '1', '23', '4', '2', '', '我是十五楼', '2017-04-01 15:44:40', '0');
+INSERT INTO `t_post` VALUES ('44', '1', '23', '4', '2', '', '十六楼', '2017-04-05 11:39:21', '0');
+INSERT INTO `t_post` VALUES ('46', '1', '22', '4', '2', '', '我来抢沙发', '2017-04-05 14:22:10', '0');
 
 -- ----------------------------
 -- Table structure for t_topic
@@ -144,7 +199,7 @@ CREATE TABLE `t_topic` (
   `last_post` datetime NOT NULL COMMENT '最后回复时间',
   `topic_views` int(11) NOT NULL DEFAULT '1' COMMENT '浏览数',
   `topic_replies` int(11) NOT NULL DEFAULT '0' COMMENT '回复数',
-  `digest` int(11) NOT NULL COMMENT '0:不是精华话题 1:是精华话题',
+  `digest` int(11) NOT NULL DEFAULT '0' COMMENT '0:不是精华话题 1:是精华话题',
   `deleteflag` int(11) DEFAULT '0',
   PRIMARY KEY (`topic_id`),
   KEY `IDX_TOPIC_USER_ID` (`user_id`),
@@ -164,8 +219,8 @@ INSERT INTO `t_topic` VALUES ('6', '4', '写在7.15赛季末：国服战野骑27
 INSERT INTO `t_topic` VALUES ('7', '4', '7.2元素萨攻略分享：新特质收益超高 饰品无新意', '1', '2011-05-16 00:00:00', '2011-05-16 00:00:00', '0', '0', '0', '0');
 INSERT INTO `t_topic` VALUES ('20', '1', '平民卡组也要上传说！欧服难民贼分享', '1', '2011-09-17 00:00:00', '2011-09-17 00:00:00', '0', '0', '0', '0');
 INSERT INTO `t_topic` VALUES ('21', '1', '弃牌术 你离传说只有几个青玉德的距离', '1', '2011-09-17 00:00:00', '2011-09-17 00:00:00', '0', '0', '0', '0');
-INSERT INTO `t_topic` VALUES ('22', '1', '墨泽炉石秀第三期 五费大表哥也能输？', '1', '2011-09-18 00:00:00', '2011-09-18 00:00:00', '0', '0', '0', '0');
-INSERT INTO `t_topic` VALUES ('23', '1', '天梯趣味实战 土豪骑士大战狂野海盗战', '1', '2011-09-18 00:00:00', '2011-09-18 00:00:00', '0', '0', '0', '0');
+INSERT INTO `t_topic` VALUES ('22', '1', '墨泽炉石秀第三期 五费大表哥也能输？', '1', '2011-09-18 00:00:00', '2017-04-05 14:22:10', '0', '1', '0', '0');
+INSERT INTO `t_topic` VALUES ('23', '1', '天梯趣味实战 土豪骑士大战狂野海盗战', '1', '2011-09-18 00:00:00', '2017-04-05 14:02:06', '0', '17', '0', '0');
 INSERT INTO `t_topic` VALUES ('24', '8', '一个人的命运呀,当然要靠自我奋斗', '4', '2017-03-29 00:00:00', '2017-03-29 00:00:00', '1', '0', '1', '0');
 INSERT INTO `t_topic` VALUES ('27', '8', '接龙，我先来一句，“苟”', '5', '2017-03-29 00:00:00', '2017-03-29 00:00:00', '1', '0', '0', '0');
 
@@ -192,8 +247,8 @@ CREATE TABLE `t_user` (
 INSERT INTO `t_user` VALUES ('1', 'tom', '1234', '1', '1', '205', null, null);
 INSERT INTO `t_user` VALUES ('2', 'john', '1234', '2', '1', '10', null, null);
 INSERT INTO `t_user` VALUES ('3', 'ggg', '123123', '1', '0', '110', null, null);
-INSERT INTO `t_user` VALUES ('4', '廖晟', '123456', '1', '0', '155', '2017-03-30 15:15:25', '127.0.0.1');
-INSERT INTO `t_user` VALUES ('5', '王预', '123456', '1', '0', '100', null, null);
+INSERT INTO `t_user` VALUES ('4', '廖晟', '123456', '1', '0', '425', '2017-04-05 14:21:44', '127.0.0.1');
+INSERT INTO `t_user` VALUES ('5', '王预', '123456', '1', '0', '110', '2017-04-01 14:36:48', '127.0.0.1');
 INSERT INTO `t_user` VALUES ('6', '廖晟2', '123456', '1', '0', '100', null, null);
 INSERT INTO `t_user` VALUES ('7', '廖晟3', '123456', '1', '0', '100', null, null);
 INSERT INTO `t_user` VALUES ('8', '廖晟5', '123456', '1', '0', '100', null, null);

@@ -52,7 +52,7 @@ function login(){
                 });
             }else if(data.stat==1) {
                 Messenger().post({
-                    message: "登陆成功！",
+                    message: "登陆成功！积分+5",
                     type: "success"
                 });
                 layer.msg('登陆成功!', {time: 3000, icon:6},function () {debugger

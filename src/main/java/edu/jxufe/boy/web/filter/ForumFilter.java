@@ -57,12 +57,10 @@ public class ForumFilter implements Filter {
 					if (!StringUtils.isEmpty(httpRequest.getQueryString())) {
 						toUrl += "?" + httpRequest.getQueryString();
 					}
-
-					// ②-4将用户的请求URL保存在session中，用于登录成功之后，跳到目标URL
+					// 将用户的请求URL保存在session中，用于登录成功之后，跳到目标URL
 					httpRequest.getSession().setAttribute(LOGIN_TO_URL, toUrl);
-
 					// ②-5转发到登录页面
-					request.getRequestDispatcher("/login").forward(request,
+					request.getRequestDispatcher("/homepage/toLogin").forward(request,
 							response);
 					return;
 				}

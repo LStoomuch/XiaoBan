@@ -35,17 +35,13 @@
     <%
         Page pagedPost = (Page) request.getAttribute("pagedPost");
         List<Post> postList = pagedPost.getResult();
-        Post post = null;
-        if (postList!=null){
-             post =  postList.get(0);
-        }
         User user = (User) session.getAttribute("USER_CONTEXT");
     %>
 </head>
 <body>
 
 <tr>
-    <h3 class="bg-success">${topic.topicTitle}</h3>
+    <h4 class="bg-success">${topic.topicTitle}</h4>
 </tr>
 
 <%for (int i = 0;i<postList.size();i++){%>
@@ -55,10 +51,11 @@
             <%if (postList.get(i) instanceof MainPost){%>
                 楼主：
             <%}else{%>
-                <%=(pagedPost.getCurrentPageNo()-1)* pagedPost.getPageSize()+i%>楼
+                <%=(pagedPost.getCurrentPageNo()-1)* pagedPost.getPageSize()+i%>楼:
             <%}%>
             <a href="#" onclick="alert('功能开发中')"><%=postList.get(i).getUser().getUserName()%></a>
-         &nbsp;积分：<%=postList.get(i).getUser().getCredit()%>
+        &nbsp;积分：<%=postList.get(i).getUser().getCredit()%>
+        <p class="userInfo">&nbsp;时间：<%=postList.get(i).getCreateTime()%></p>
         </p>
     </blockquote>
     <% if (postList.size()==1&&postList.get(i) instanceof MainPost){%>
@@ -94,16 +91,16 @@
     </ul>
 </div>
 <form class="form-group" id="addPostForm">
+    <input type="hidden" ID="topic.topicId" name="topic.topicId" value="${topic.topicId}">
+    <input type="hidden" ID="boardId" name="boardId" value="${topic.boardId}">
     <%if(user==null){%>
     <div class="form-group">
-        <textarea style="height: 70px" class="form-control" rows="3"  onclick="askForLogin();"></textarea>
+        <textarea style="height: 70px" class="form-control" rows="3" placeholder="回复帖子" onclick="askForLogin();"></textarea>
     </div>
     <div class="form-group">
         <button type="button" id="addPostButton"  class="btn btn-lg btn-primary btn-block" onclick="askForLogin();">回复</button>
     </div>
     <%}else{%>
-    <input type="hidden" ID="topic.topicId" name="topic.topicId" value="${topic.topicId}">
-    <input type="hidden" ID="boardId" name="boardId" value="${topic.boardId}">
     <div class="form-group">
         <textarea class="form-control" rows="3" id="postText" name="postText"></textarea>
     </div>

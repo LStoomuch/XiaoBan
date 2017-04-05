@@ -17,17 +17,20 @@
         body{
             padding-top: 70px;
         }
+        .userInfo{
+            font-size: 14px;
+        }
     </style>
     <link rel='stylesheet' href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
 <body>
 <c:forEach items="${boards}" var="board">
     <blockquote>
-        <h3>
+        <p>
             <a href="BoardManage/board/loadBoardTopicsPage-${board.boardId}">${board.boardName}</a>
-        </h3>
-        <p>${board.boardDesc}</p>
-        <p>帖子数目：${board.topicNum}</p>
+        </p>
+        <p class="userInfo">${board.boardDesc}</p>
+        <p class="userInfo">帖子数目：${board.topicNum}</p>
     </blockquote>
 </c:forEach>
 

@@ -93,7 +93,7 @@ public class BoardManageController extends BaseController {
 	 * @param topic
 	 * @return
 	 */
-	@RequestMapping(value = "/board/addTopic", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/topic", method = RequestMethod.POST)
 	public String addTopic(HttpServletRequest request,Topic topic) {
 		User user = getSessionUser(request);
 		topic.setUser(user);
@@ -150,12 +150,19 @@ public class BoardManageController extends BaseController {
 	 */
 	@RequestMapping(value = "/board/Post",method = RequestMethod.POST)
 	@ResponseBody
-	public Map addPost(HttpServletRequest request, Post post,@RequestParam(required = false,value = "currentPage") String currentPage) {
+	public Map addPost(HttpServletRequest request, Post post) {
+		Map map = new HashMap();
+		if (post.getPostText()==null||post.getPostText()==""){
+			map.put("msg","回复内容不能为空");
+			return map;
+		}
+		if (post.getPostText().length()>300){
+			map.put("msg","回复内容不能超过300字");
+			return map;
+		}
 		post.setCreateTime(new Date());
 		post.setUser(getSessionUser(request));
 		forumService.addPost(post);
-		Map map = new HashMap();
-		map.put("currentPage",currentPage);
 		return map;
 	}
 

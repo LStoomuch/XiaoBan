@@ -21,11 +21,11 @@
 <input id="boardId" style="display:none;" value="${board.boardId}"/>
 <div id="topPage"></div>        <!-- 顶部导航栏-->
 <div class="container" id="topicContainer"></div>     <!--中部 帖子列表-->
-<p id="test">1</p>
 
 
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+<script src="../../../js/pub/layer/layer.js"></script>
 <script src="../../../js/pub/publicJS.js"></script>
 <script src="../../../js/BoardTopic/BoardTopic.js"></script>
 </body>

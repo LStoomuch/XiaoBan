@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import static edu.jxufe.boy.cons.CommonConstant.LOGIN_TO_URL;
+
 /**
  * 
  * <br>
@@ -66,17 +68,14 @@ public class LoginController extends BaseController {
 			dbUser.setLastVisit(new Date());
 			userService.loginSuccess(dbUser);
 			setSessionUser(request,dbUser);
-			String url = request.getRequestURL().toString();
-			if (!StringUtils.isEmpty(request.getQueryString())) {
-				url += "?" + request.getQueryString();
+
+			String toUrl = (String)request.getSession().getAttribute(CommonConstant.LOGIN_TO_URL);
+			request.getSession().removeAttribute(CommonConstant.LOGIN_TO_URL);
+			//如果当前会话中没有保存登录之前的请求URL，则直接跳转到主页
+			if(StringUtils.isEmpty(toUrl)){
+				toUrl = "/homepage";
 			}
-//			String toUrl = (String)request.getSession().getAttribute(CommonConstant.LOGIN_TO_URL);
-//			request.getSession().removeAttribute(CommonConstant.LOGIN_TO_URL);
-//			//如果当前会话中没有保存登录之前的请求URL，则直接跳转到主页
-//			if(StringUtils.isEmpty(toUrl)){
-//				toUrl = "/Homepage/homepage";
-//			}
-			map.put("toURL",url);
+			map.put("toURL",toUrl);
 		}
 		return map;
 	}
