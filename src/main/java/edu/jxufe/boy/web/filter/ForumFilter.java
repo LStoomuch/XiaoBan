@@ -28,7 +28,7 @@ public class ForumFilter implements Filter {
 
 	// ① 不需要登录即可访问的URI资源
 	private static final String[] INHERENT_ESCAPE_URIS = {"/homepage","/RegisterController","/login","/BoardManage/AllBoards","/BoardManage/board/loadBoardTopicsPage-","/BoardManage/board/listBoardTopics-",
-			"/BoardManage/board/loadTopicPostPage-","/BoardManage/board/listTopicPosts-"};
+			"/BoardManage/board/loadTopicPostPage-","/BoardManage/board/listTopicPosts-","/ForumManage"};
 
 	// ② 执行过滤
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -40,7 +40,7 @@ public class ForumFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			String a = httpRequest.getRequestURI();
- 			if(a.contains(".css") || a.contains(".js") || a.contains(".png")|| a.contains(".jpg")){
+ 			if(a.contains(".css") || a.contains(".js") || a.contains(".png")|| a.contains(".jpg")||a.contains(".ico")){
 				//如果发现是css或者js文件，直接放行
 				chain.doFilter(request, response);
 			}else {

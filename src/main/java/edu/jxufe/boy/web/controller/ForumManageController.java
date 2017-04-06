@@ -3,9 +3,7 @@ package edu.jxufe.boy.web.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import edu.jxufe.boy.dao.Page;
 import edu.jxufe.boy.entity.Board;
 import edu.jxufe.boy.entity.User;
 import edu.jxufe.boy.service.ForumService;
@@ -31,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @see
  *@since
  */
+@RequestMapping("/ForumManage")
 @Controller
 public class ForumManageController extends BaseController {
 	@Autowired
@@ -38,6 +37,32 @@ public class ForumManageController extends BaseController {
 	@Autowired
 	private UserService userService;
 
+	@RequestMapping(value = "AllPage")
+	public ModelAndView showAllPage(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("manager/managerPage");
+		return modelAndView;
+	}
+	@RequestMapping(value = "manageDefaultPage")
+	public ModelAndView showManageDefaultPage(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("manager/manageDefaultPage");
+		return modelAndView;
+	}
+	@RequestMapping(value = "manageLeftPage")
+	public ModelAndView showManageLeftPage(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("manager/manageLeftPage");
+		return modelAndView;
+	}
+	@RequestMapping(value = "boardManage")
+	public ModelAndView showboardManage(){
+		List<Board> boards =  forumService.getAllBoards();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("boards",boards);
+		modelAndView.setViewName("manager/boardManage");
+		return modelAndView;
+	}
 	/**
 	 * 列出所有的论坛模块
 	 * @return

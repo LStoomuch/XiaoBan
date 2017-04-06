@@ -25,7 +25,7 @@
             font-size: 8px;
         }
     </style>
-    <link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <%--<link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">--%>
     <%
         Page pageTopic = (Page) request.getAttribute("pagedTopic");
         List<Topic> topicList = pageTopic.getResult();
@@ -115,7 +115,7 @@
     <%}%>
 </form>
 
-<script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
-<script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+<%--<script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>--%>
+<%--<script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>--%>
 </body>
 </html>
