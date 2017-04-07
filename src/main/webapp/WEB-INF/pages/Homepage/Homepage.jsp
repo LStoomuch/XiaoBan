@@ -10,7 +10,7 @@
     <title>搞个大新闻</title>
     <link rel='stylesheet' href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="icon" href="../../../images/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="Images/wangyi.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../../images/favicon.ico" type="image/x-icon" />
     <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
     <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
     <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>

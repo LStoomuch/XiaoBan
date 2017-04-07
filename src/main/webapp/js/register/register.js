@@ -15,9 +15,9 @@ $(document).ready(function () {
             register();
         }
     });
-    $('#registerForm').keydown(function(e){
+    $('#registerForm').keydown(function(e){debugger
         if(e.keyCode==13){
-            if(checkPassword==1)
+            if(checkPassword()==1)
             register();
         }
     });
@@ -31,6 +31,17 @@ function register() {
         url : path+'/RegisterController/register',
         data:formData,
         dataType:"json",
+        beforeSend: function () {
+            //3.让提交按钮失效，以实现防止按钮重复点击
+            $("#registerButton").attr('disabled', 'disabled');
+
+            //4.给用户提供友好状态提示
+            $("#registerButton").text('提交中...');
+        },
+        // complete: function () {
+        //     //5.让登陆按钮重新有效
+        //     $("#registerButton").removeAttr('disabled');
+        // },
         success:function (data) {
             if (data.errorMsg==1){
                 layer.tips('用户名已经存在，请选择其它的名字。', '#userName', {tips: 1});

@@ -94,16 +94,16 @@ public class BoardManageController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/board/topic", method = RequestMethod.POST)
-	public String addTopic(HttpServletRequest request,Topic topic) {
+	@ResponseBody
+	public Map addTopic(HttpServletRequest request,Topic topic) {
 		User user = getSessionUser(request);
 		topic.setUser(user);
 		Date now = new Date();
 		topic.setCreateTime(now);
 		topic.setLastPost(now);
 		forumService.addTopic(topic);
-		String targetUrl = "/board/listBoardTopics-" + topic.getBoardId()
-				+ ".html";
-		return "redirect:"+targetUrl;
+		Map map = new HashMap();
+		return map;
 	}
 
 	/**
@@ -171,14 +171,20 @@ public class BoardManageController extends BaseController {
 	 * 
 	 * @param boardIds
 	 */
-	@RequestMapping(value = "/board/removeBoard", method = RequestMethod.GET)
-	public String removeBoard(@RequestParam("boardIds") String boardIds) {
+	@RequestMapping(value = "/board/Boards/{boardIds}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Map removeBoard(@PathVariable("boardIds") String boardIds) {
 		String[] arrIds = boardIds.split(",");
+		Map map = new HashMap();
 		for (int i = 0; i < arrIds.length; i++) {
-			forumService.removeBoard(new Integer(arrIds[i]));
+		try {
+				forumService.removeBoard(new Integer(arrIds[i]));
+			map.put("msg","成功删除所选");
+		}catch (Exception e){
+			map.put("msg","删除主键为"+arrIds[i]+"的版块时失败");
 		}
-		String targetUrl = "/index.html";
-		return "redirect:"+targetUrl;
+		}
+		return map;
 	}
 
 	/**

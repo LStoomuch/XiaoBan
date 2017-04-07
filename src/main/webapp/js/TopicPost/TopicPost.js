@@ -1,6 +1,7 @@
 /**
  * Created by liaos on 2017/3/29.
  */
+var isFirstTime=true;
 $(document).ready(function () {
     loadPage();
 });
@@ -32,6 +33,17 @@ function addPost() {debugger
         type:"post",
         data:formData,
         dataType:"json",
+        beforeSend: function () {
+            //3.让提交按钮失效，以实现防止按钮重复点击
+            $("#addPostButton").attr('disabled', 'disabled');
+
+            //4.给用户提供友好状态提示
+            $("#addPostButton").text('提交中...');
+        },
+        complete: function () {
+            //5.让登陆按钮重新有效
+            $("#addPostButton").removeAttr('disabled');
+        },
         success:function (data) {debugger
             if(data.msg!=null){
                 layer.tips(data.msg,"#postText",{tips:1});

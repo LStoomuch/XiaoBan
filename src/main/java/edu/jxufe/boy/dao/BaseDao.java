@@ -145,7 +145,12 @@ public class BaseDao<T>{
 			return new Page();
 		// 实际查询返回分页对象
 		int startIndex = Page.getStartOfPage(pageNo, pageSize);
-		Query query = createQuery(hql, values);
+		Query query = null;
+		if(values==null){
+			 query = createQuery(hql);
+		}else{
+			 query = createQuery(hql, values);
+		}
 		List list = query.setFirstResult(startIndex).setMaxResults(pageSize).list();
 
 		return new Page(startIndex, totalCount, pageSize, list);

@@ -44,6 +44,17 @@ function login(){
         type:"post",
         data:formData,
         dataType:"json",
+        beforeSend: function () {debugger
+            //3.让提交按钮失效，以实现防止按钮重复点击
+            $("#loginButton").attr('disabled', 'disabled');
+
+            //4.给用户提供友好状态提示
+            $("#loginButton").text('登陆中...');
+        },
+        complete: function () {
+            //5.让登陆按钮重新有效
+            $("#loginButton").removeAttr('disabled');
+        },
         success:function (data) {
             if (data.stat==0){
                 Messenger().post({

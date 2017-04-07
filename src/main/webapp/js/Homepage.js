@@ -3,7 +3,7 @@
  */
 
 
-$(document).ready(function () {
+$(document).ready(function () {debugger
     showAllBoard();
     showTopPage();
 });

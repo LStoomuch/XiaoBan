@@ -1,8 +1,11 @@
 
 package edu.jxufe.boy.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import edu.jxufe.boy.cons.CommonConstant;
 import edu.jxufe.boy.dao.Page;
 import edu.jxufe.boy.entity.Board;
 import edu.jxufe.boy.entity.User;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -56,10 +60,11 @@ public class ForumManageController extends BaseController {
 		return modelAndView;
 	}
 	@RequestMapping(value = "boardManage")
-	public ModelAndView showboardManage(){
-		List<Board> boards =  forumService.getAllBoards();
+	public ModelAndView showBoardManage(@RequestParam(value = "pageNo", required = false) Integer pageNo){
+		pageNo = pageNo==null?1:pageNo;
+		Page pagedBoards =  forumService.getPagedBoards(pageNo, CommonConstant.PAGE_SIZE);
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("boards",boards);
+		modelAndView.addObject("pagedBoards",pagedBoards);
 		modelAndView.setViewName("manager/boardManage");
 		return modelAndView;
 	}
@@ -77,23 +82,30 @@ public class ForumManageController extends BaseController {
 	}
 
 	/**
-	 *  添加一个主题帖
+	 *  加载页面--添加版块
 	 * @return
 	 */
 	@RequestMapping(value = "/forum/addBoardPage", method = RequestMethod.GET)
 	public String addBoardPage() {
-		return "/addBoard";
+		return "/manager/addBoardPage";
 	}
 
 	/**
-	 * 添加一个主题帖
+	 * 添加一个论坛版块
 	 * @param board
 	 * @return
 	 */
-	@RequestMapping(value = "/forum/addBoard", method = RequestMethod.POST)
-	public String addBoard(Board board) {
-		forumService.addBoard(board);
-		return "/addBoardSuccess";
+	@RequestMapping(value = "/forum/Board", method = RequestMethod.POST)
+	@ResponseBody
+	public Map addBoard(Board board) {
+		Map map = new HashMap();
+		try{
+			forumService.addBoard(board);
+			map.put("msg","新增成功");
+		}catch (Exception e){
+			map.put("msg","新增失败");
+		}
+		return map;
 	}
 
 	/**

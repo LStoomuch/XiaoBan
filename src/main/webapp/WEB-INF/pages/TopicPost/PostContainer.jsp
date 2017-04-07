@@ -98,14 +98,14 @@
         <textarea style="height: 70px" class="form-control" rows="3" placeholder="回复帖子" onclick="askForLogin();"></textarea>
     </div>
     <div class="form-group">
-        <button type="button" id="addPostButton"  class="btn btn-lg btn-primary btn-block" onclick="askForLogin();">回复</button>
+        <button type="button"   class="btn btn-lg btn-primary btn-block" onclick="askForLogin();">回复</button>
     </div>
     <%}else{%>
     <div class="form-group">
         <textarea class="form-control" rows="3" id="postText" name="postText"></textarea>
     </div>
     <div class="form-group">
-        <button type="button" onclick="addPost();" class="btn btn-lg btn-primary btn-block">回复</button>
+        <button type="button" onclick="addPost();" class="btn btn-lg btn-primary btn-block" id="addPostButton">回复</button>
     </div>
     <%}%>
 </form>

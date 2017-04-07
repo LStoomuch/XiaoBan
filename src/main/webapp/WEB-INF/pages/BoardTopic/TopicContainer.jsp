@@ -100,7 +100,7 @@
         <textarea style="height: 70px" class="form-control" rows="3" placeholder="发表帖子内容" onclick="askForLogin();"></textarea>
     </div>
     <div class="form-group">
-        <button type="button" id="addTopicButton"  class="btn btn-lg btn-primary btn-block" onclick="askForLogin();">发表帖子</button>
+        <button type="button"  class="btn btn-lg btn-primary btn-block" onclick="askForLogin();">发表帖子</button>
     </div>
     <%}else{%>
     <div class="form-group">
@@ -110,7 +110,7 @@
         <textarea class="form-control" rows="3" id="postText" name="mainPost.postText" placeholder="发表帖子内容"></textarea>
     </div>
     <div class="form-group">
-        <button type="button" onclick="addTopic();" class="btn btn-lg btn-primary btn-block">发表帖子</button>
+        <button type="button" onclick="addTopic();" class="btn btn-lg btn-primary btn-block" id="addTopicButton">发表帖子</button>
     </div>
     <%}%>
 </form>

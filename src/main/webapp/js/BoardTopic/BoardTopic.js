@@ -11,7 +11,7 @@ function loadPage() {
 function askForLogin() {
     layer.tips("请先登录", '#addTopicButton', {tips: 1});
 }
-function addTopic() {debugger
+function addTopic() {
     var formData = $("#addTopicForm").serializeArray();
     var currentPage = $("#currentPage").text();
     var topicTitle = $("#topicTitle").val();
@@ -36,10 +36,21 @@ function addTopic() {debugger
         async:true,
         data : formData,
         type : "post",
-        url : "/BoardManage//board/topic",
+        url : "/BoardManage/board/topic",
         dataType:"json",
-        success:function (data) {
+        beforeSend: function () {
+            //3.让提交按钮失效，以实现防止按钮重复点击
+            $("#addTopicButton").attr('disabled', 'disabled');
 
+            //4.给用户提供友好状态提示
+            $("#addTopicButton").text('提交中...');
+        },
+        complete: function () {
+            //5.让登陆按钮重新有效
+            $("#addTopicButton").removeAttr('disabled');
+        },
+        success:function (data) {
+            showAllTopic(currentPage);
         },
         error:function (data) {
 
