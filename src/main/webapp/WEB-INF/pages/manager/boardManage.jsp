@@ -51,7 +51,7 @@
         <td><%=boardList.get(i).getTopicNum()%></td>
         <td>
             <button class="btn btn-danger" onclick="deleteBoard(<%=boardList.get(i).getBoardId()%>,<%=pagedBoards.getCurrentPageNo()%>)">删除</button>
-            <button class="btn btn btn-warning" onclick="updateBoard(<%=boardList.get(i).getBoardId()%>)">修改</button>
+            <button class="btn btn btn-warning" onclick="loadAddBoardPage(<%=boardList.get(i).getBoardId()%>)">修改</button>
         </td>
     </tr>
     <%}%>

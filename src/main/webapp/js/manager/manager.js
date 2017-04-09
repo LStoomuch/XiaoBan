@@ -85,20 +85,31 @@ function getSelectedIds(){
  * @param boardId
  * @param pageNo
  */
-function deleteBoard(boardId,pageNo) {
-    var url = getContextPath()+"/BoardManage/board/Boards/"+boardId;
-    $.ajax({
-        async:true,
-        type:"delete",
-        dataType:"json",
-        url:url,
-        success:function (data) {
-            if(data.msg!=null){
-                layer.alert(data.msg);
+function deleteBoard(boardId,pageNo) {debugger
+    layer.confirm('是否要删除此板块', {
+        btn: ['是的','不删了'] //按钮
+    }, function(){
+        var url = getContextPath()+"/BoardManage/board/Boards/"+boardId;
+        $.ajax({
+            async:true,
+            type:"delete",
+            dataType:"json",
+            url:url,
+            success:function (data) {
+                if(data.msg!=null){
+                    layer.msg(data.msg, {
+                        time: 2000, //2s后自动关闭
+                    });
+                }
+                showBoardManage(pageNo);
             }
-            showBoardManage(pageNo);
-        }
+        });
+    }, function(){
+        layer.msg('取消删除', {
+            time: 2000, //2s后自动关闭
+        });
     });
+
 }
 /**
  * 批量删除版块
@@ -109,18 +120,28 @@ function deleteSelectedBoards(pageNo){debugger
         layer.tips("至少选中一个版块","#deleteBoards",{tips:2});
         return;
     }
-    var url = getContextPath()+"/BoardManage/board/Boards/"+ids;
-    $.ajax({
-        async:true,
-        type:"delete",
-        dataType:"json",
-        url:url,
-        success:function (data) {
-            if(data.msg!=null){
-                layer.alert(data.msg);
+    layer.confirm('是否要删除此板块', {
+        btn: ['是的','不删了'] //按钮
+    }, function() {
+        var url = getContextPath() + "/BoardManage/board/Boards/" + ids;
+        $.ajax({
+            async: true,
+            type: "delete",
+            dataType: "json",
+            url: url,
+            success: function (data) {
+                if(data.msg!=null){
+                    layer.msg(data.msg, {
+                        time: 2000, //2s后自动关闭
+                    });
+                }
+                showBoardManage(pageNo);
             }
-            showBoardManage(pageNo);
-        }
+        });
+    }, function(){
+        layer.msg('取消删除', {
+            time: 2000, //2s后自动关闭
+        });
     });
 }
 /**
@@ -132,13 +153,22 @@ function updateBoard(boardId,pageNo) {
 
 }
 /**
- * 新增版块
+ * 加载增加板块页面
  */
-function loadAddBoardPage() {
-    layer.open({
-        type:2,
-        content:'/ForumManage/forum/addBoardPage',
-        area: ['600px', '360px'],
-        shadeClose: true //点击遮罩关闭
-    });
+function loadAddBoardPage(boardId) {
+    if(boardId==null) {
+        layer.open({
+            type: 2,
+            content: '/ForumManage/forum/BoardPage',
+            area: ['600px', '360px'],
+            shadeClose: true //点击遮罩关闭
+        });
+    }else{
+        layer.open({
+            type: 2,
+            content: '/ForumManage/forum/BoardPage?boardId='+boardId,
+            area: ['600px', '360px'],
+            shadeClose: true //点击遮罩关闭
+        });
+    }
 }

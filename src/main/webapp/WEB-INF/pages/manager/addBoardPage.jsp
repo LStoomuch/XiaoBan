@@ -1,4 +1,4 @@
-<%--
+<%@ page import="edu.jxufe.boy.entity.Board" %><%--
   Created by IntelliJ IDEA.
   User: liaosheng
   Date: 2017/4/7
@@ -14,19 +14,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新增版块</title>
     <link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <%
+        Board board = (Board) request.getAttribute("board");
+    %>
 </head>
 <body>
     <div class="container">
         <form class="form-group" id="addBoardForm">
+            <%if (board==null){%>
             <div class="form-group">
-                <input type="text" class="form-control" rows="3" placeholder="版块名称" id="boardName" name="boardName">
+                <input type="text" class="form-control" rows="3" placeholder="版块名称" id="boardName2" name="boardName">
             </div>
             <div class="form-group">
-                <textarea class="form-control" rows="3" id="boardDesc" name="boardDesc" placeholder="版块描述"></textarea>
+                <textarea class="form-control" rows="3" id="boardDesc2" name="boardDesc" placeholder="版块描述"></textarea>
             </div>
             <div class="form-group">
-                <button type="button" onclick="addBoard()" class="btn btn-lg btn-primary btn-block" id="addBoardButton">新增</button>
+                <button type="button" onclick="addBoard('add')" class="btn btn-lg btn-primary btn-block" id="addBoardButton2">新增</button>
             </div>
+            <%}else{%>
+            <div class="form-group">
+                <input type="hidden"  name="boardId" value="<%=board.getBoardId()%>">
+                <input type="hidden"  name="topicNum" value="<%=board.getTopicNum()%>">
+                <input type="hidden"  name="deleteFlag" value="<%=board.getDeleteFlag()%>">
+                板块名称<input type="text" class="form-control" rows="3" value="<%=board.getBoardName()%>" id="boardName" name="boardName">
+            </div>
+            <div class="form-group">
+                版块描述<textarea class="form-control" rows="3" id="boardDesc" name="boardDesc" ><%=board.getBoardDesc()%></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="addBoard('update')" class="btn btn-lg btn-primary btn-block" id="addBoardButton">修改</button>
+            </div>
+            <%}%>
         </form>
     </div>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>

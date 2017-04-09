@@ -85,9 +85,16 @@ public class ForumManageController extends BaseController {
 	 *  加载页面--添加版块
 	 * @return
 	 */
-	@RequestMapping(value = "/forum/addBoardPage", method = RequestMethod.GET)
-	public String addBoardPage() {
-		return "/manager/addBoardPage";
+	@RequestMapping(value = "/forum/BoardPage", method = RequestMethod.GET)
+	public ModelAndView addBoardPage(@RequestParam(value = "boardId",required = false) Integer boardId) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/manager/addBoardPage");
+		if(boardId==null) {
+			return modelAndView;
+		}
+		Board board = forumService.getBoardById(boardId);
+		modelAndView.addObject("board",board);
+		return modelAndView;
 	}
 
 	/**
@@ -97,13 +104,24 @@ public class ForumManageController extends BaseController {
 	 */
 	@RequestMapping(value = "/forum/Board", method = RequestMethod.POST)
 	@ResponseBody
-	public Map addBoard(Board board) {
+	public Map addBoard(Board board,@RequestParam(value = "type",required = false)String type) {
 		Map map = new HashMap();
-		try{
-			forumService.addBoard(board);
-			map.put("msg","新增成功");
-		}catch (Exception e){
-			map.put("msg","新增失败");
+		if(type!=null) {
+			if(type.equals("add")) {
+				try {
+					forumService.addBoard(board);
+					map.put("msg", "新增成功");
+				} catch (Exception e) {
+					map.put("msg", "新增失败");
+				}
+			}else if(type.equals("update")){
+				try {
+					forumService.updateBoard(board);
+					map.put("msg", "修改成功");
+				} catch (Exception e) {
+					map.put("msg", "修改失败");
+				}
+			}
 		}
 		return map;
 	}

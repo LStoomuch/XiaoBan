@@ -117,6 +117,14 @@ public class ForumService {
 	public void addBoard(Board board) {
 		boardDao.save(board);
 	}
+
+	/**
+	 * 修改版块
+	 * @param board
+	 */
+	public void updateBoard(Board board){
+		boardDao.update(board);
+	}
 	
 	/**
 	 * 删除一个版块

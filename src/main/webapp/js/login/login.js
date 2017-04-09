@@ -12,7 +12,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#password").click(function (e) {
+    $("#password").focus(function (e) {
         $("#allContainer").css({
                 "background-image": "url(../../images/inputPassword.jpg)"
                 // "background-size":"cover"
@@ -21,14 +21,11 @@ $(document).ready(function () {
         // $("#allContainer").css(
         //     "background","#fff"
         // )
-        $(document).one("click",function () {
-            if($(this).id!="allContainer") {
+        $("#password").blur(function () {
                 $("#allContainer").css(
                     "background", "#fff"
                 );
-            }
         });
-        e.stopPropagation();
     });
 
 
@@ -44,19 +41,17 @@ function login(){
         type:"post",
         data:formData,
         dataType:"json",
-        beforeSend: function () {debugger
+        beforeSend: function () {
             //3.让提交按钮失效，以实现防止按钮重复点击
             $("#loginButton").attr('disabled', 'disabled');
 
             //4.给用户提供友好状态提示
             $("#loginButton").text('登陆中...');
         },
-        complete: function () {
-            //5.让登陆按钮重新有效
-            $("#loginButton").removeAttr('disabled');
-        },
         success:function (data) {
             if (data.stat==0){
+                $("#loginButton").removeAttr('disabled');
+                $("#loginButton").text('登陆');
                 Messenger().post({
                     message: data.errorMsg,
                     type: "error"
@@ -76,7 +71,9 @@ function login(){
                 });
             }
         },
-        error:function () {
+        error:function () {debugger
+            $("#loginButton").removeAttr('disabled');
+            $("#loginButton").text('登陆');
             Messenger().post({
                 message: "服务器异常！",
                 type: "error"
