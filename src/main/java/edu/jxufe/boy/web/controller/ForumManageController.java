@@ -13,10 +13,7 @@ import edu.jxufe.boy.service.ForumService;
 import edu.jxufe.boy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -66,6 +63,15 @@ public class ForumManageController extends BaseController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("pagedBoards",pagedBoards);
 		modelAndView.setViewName("manager/boardManage");
+		return modelAndView;
+	}
+	@RequestMapping(value = "userManage")
+	public ModelAndView showUserManage(@RequestParam(value = "pageNo",required = false)Integer pageNo){
+		pageNo = pageNo==null?1:pageNo;
+		Page pagedUsers =  forumService.getPageUsers(pageNo, CommonConstant.PAGE_SIZE);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("pagedUsers",pagedUsers);
+		modelAndView.setViewName("manager/userManage");
 		return modelAndView;
 	}
 	/**
@@ -166,38 +172,37 @@ public class ForumManageController extends BaseController {
 	}
 
 	/**
-	 * 用户锁定及解锁管理页面
+	 * 用户解锁
 	 * @return
 	 */
-	@RequestMapping(value = "/forum/userLockManagePage", method = RequestMethod.GET)
-	public ModelAndView userLockManagePage() {
-		ModelAndView view =new ModelAndView();
-		List<User> users = userService.getAllUsers();
-		view.setViewName("/userLockManage");
-		view.addObject("users", users);
-		return view;
+	@RequestMapping(value = "/forum/userUnLock/{userId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Map unLockUser(@PathVariable("userId") int userId) {
+		Map map =new HashMap();
+		try{
+			userService.unlockUser(userId);
+			map.put("msg","已解锁该用户");
+		}catch (Exception e){
+			map.put("msg","解锁失败");
+		}
+		return map;
 	}
 
 	/**
-	 * 用户锁定及解锁设定
-	 * @param userName
-	 * @param userName
+	 * 用户锁定
+	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/forum/userLockManage", method = RequestMethod.POST)
-	public ModelAndView userLockManage(@RequestParam("userName") String userName
-			,@RequestParam("locked") String locked) {
-		ModelAndView view =new ModelAndView();
-        User user = userService.getUserByUserName(userName);
-		if (user == null) {
-			view.addObject("errorMsg", "用户名(" + userName
-					+ ")不存在");
-			view.setViewName("/fail");
-		} else {
-			user.setLocked(Integer.parseInt(locked));
-			userService.update(user);
-			view.setViewName("/success");
+	@RequestMapping(value = "/forum/userLock/{userId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Map lockUser(@PathVariable("userId") int userId) {
+		Map map =new HashMap();
+        try{
+        	userService.lockUser(userId);
+			map.put("msg","已锁定该用户");
+		}catch (Exception e){
+			map.put("msg","锁定失败");
 		}
-		return view;
+		return map;
 	}
 }

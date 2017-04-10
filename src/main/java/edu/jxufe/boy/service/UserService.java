@@ -73,20 +73,20 @@ public class UserService {
 	
 	/**
 	 * 将用户锁定，锁定的用户不能够登录
-	 * @param userName 锁定目标用户的用户名
+	 * @param userId 锁定目标用户的用户名
 	 */
-	public void lockUser(String userName){
-		User user = userDao.getUserByUserName(userName);
+	public void lockUser(int userId){
+		User user = userDao.getUserByUserId(userId);
 		user.setLocked(User.USER_LOCK);
 	    userDao.update(user);
 	}
 	
 	/**
 	 * 解除用户的锁定
-	 * @param userName 解除锁定目标用户的用户名
+	 * @param userId 解除锁定目标用户的用户名
 	 */
-	public void unlockUser(String userName){
-		User user = userDao.getUserByUserName(userName);
+	public void unlockUser(int userId){
+		User user = userDao.getUserByUserId(userId);
 		user.setLocked(User.USER_UNLOCK);
 		userDao.update(user);
 	}

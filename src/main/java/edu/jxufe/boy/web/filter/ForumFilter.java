@@ -28,8 +28,9 @@ public class ForumFilter implements Filter {
 
 	// ① 不需要登录即可访问的URI资源
 	private static final String[] INHERENT_ESCAPE_URIS = {"/homepage","/RegisterController","/login","/BoardManage/AllBoards","/BoardManage/board/loadBoardTopicsPage-","/BoardManage/board/listBoardTopics-",
-			"/BoardManage/board/loadTopicPostPage-","/BoardManage/board/listTopicPosts-","/ForumManage"};
+			"/BoardManage/board/loadTopicPostPage-","/BoardManage/board/listTopicPosts-"};
 
+	private static final String[] MANAGER_URIS = {"/ForumManage"};
 	// ② 执行过滤
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
@@ -50,6 +51,14 @@ public class ForumFilter implements Filter {
 
 				User userContext = getSessionUser(httpRequest);
 
+				//如果当前用户不是管理员并且访问uri是管理页面
+				if(userContext!=null) {
+					if (userContext.getUserType()!=2 && isManagerURI(httpRequest.getRequestURI(), httpRequest)) {
+						request.getRequestDispatcher("/homepage").forward(request,
+								response);
+						return;
+					}
+				}
 				// ②-3 用户未登录, 且当前URI资源需要登录才能访问
 				if (userContext == null
 						&& !isURILogin(httpRequest.getRequestURI(), httpRequest)) {
@@ -85,6 +94,24 @@ public class ForumFilter implements Filter {
 				|| (request.getContextPath() + "/").equalsIgnoreCase(requestURI))
 			return true;
 		for (String uri : INHERENT_ESCAPE_URIS) {
+			if (requestURI != null && requestURI.indexOf(uri) >= 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 当前URI资源需要管理员登陆才能访问
+	 * @param requestURI
+	 * @param request
+	 * @return
+	 */
+	private boolean isManagerURI(String requestURI, HttpServletRequest request){
+		if (request.getContextPath().equalsIgnoreCase(requestURI)
+				|| (request.getContextPath() + "/").equalsIgnoreCase(requestURI))
+			return true;
+		for (String uri : MANAGER_URIS) {
 			if (requestURI != null && requestURI.indexOf(uri) >= 0) {
 				return true;
 			}

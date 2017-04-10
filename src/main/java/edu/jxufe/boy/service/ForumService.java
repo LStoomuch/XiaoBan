@@ -175,12 +175,21 @@ public class ForumService {
      */
     public Page getPagedPosts(int topicId,int pageNo,int pageSize){
         return postDao.getPagedPosts(topicId,pageNo,pageSize);
-    }    
+    }
 
+	/**
+	 * 分页查询所有版块
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
     public Page getPagedBoards(int pageNo,int pageSize){
     	return boardDao.getPagedBoards(pageNo,pageSize);
 	}
 
+	public Page getPageUsers(int pageNo,int pageSize){
+    	return userDao.getPagedUsers(pageNo,pageSize);
+	}
 	/**
 	 * 查找出所有包括标题包含title的主题帖
 	 * 

@@ -37,7 +37,7 @@
                         <li id="boardManage" onclick="showBoardManage();"><a href="#"><i class="glyphicon glyphicon-user"></i>版块管理</a></li>
                         <li id="topicManage"><a href="#"><i class="glyphicon glyphicon-th-list"></i>帖子管理</a></li>
                         <li id="postManage"><a href="#"><i class="glyphicon glyphicon-asterisk"></i>回复管理</a></li>
-                        <li id="userManage"><a href="#"><i class="glyphicon glyphicon-edit"></i>用户管理</a></li>
+                        <li id="userManage" onclick="showUserManage();"><a href="#"><i class="glyphicon glyphicon-edit"></i>用户管理</a></li>
                         <%--<li><a href="#"><i class="glyphicon glyphicon-eye-open"></i>日志查看</a></li>--%>
                     </ul>
                 </li>

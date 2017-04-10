@@ -58,6 +58,26 @@ function showBoardManage(pageNo) {
     });
 }
 /**
+ * 显示用户管理页面
+ * @param pageNo
+ */
+function showUserManage(pageNo) {
+    if (pageNo!=null){
+        var url_managerContainer = getContextPath()+"/ForumManage/userManage?pageNo="+pageNo;
+
+    }else if (pageNo==null){
+        var url_managerContainer = getContextPath()+"/ForumManage/userManage";
+    }
+    $.ajax({
+        async:true,
+        url:url_managerContainer,
+        type:"get",
+        success:function (html) {
+            $("#managerContainer").html(html);
+        }
+    });
+}
+/**
  * 获取多选框选中的IDs
  * @returns {*}
  */
@@ -145,12 +165,64 @@ function deleteSelectedBoards(pageNo){debugger
     });
 }
 /**
- * 修改选中版块
- * @param boardId
+ * 锁定用户
+ * @param userId
  * @param pageNo
  */
-function updateBoard(boardId,pageNo) {
-
+function lockUser(userId, pageNo) {
+    layer.confirm('是否要锁定该用户', {
+        btn: ['是的','算了'] //按钮
+    }, function() {
+        var url = getContextPath() + "/ForumManage/forum/userLock/" + userId;
+        $.ajax({
+            async: true,
+            type: "get",
+            dataType: "json",
+            url: url,
+            success: function (data) {
+                if(data.msg!=null){
+                    layer.msg(data.msg, {
+                        time: 2000, //2s后自动关闭
+                    });
+                }
+                showUserManage(pageNo);
+            }
+        });
+    }, function(){
+        layer.msg('已取消', {
+            time: 2000, //2s后自动关闭
+        });
+    });
+}
+/**
+ * 解锁用户
+ * @param userId
+ * @param pageNo
+ */
+function unlockUser(userId, pageNo) {
+    layer.confirm('是否要解锁', {
+        btn: ['是的','算了'] //按钮
+    }, function() {
+        var url = getContextPath() + "/ForumManage/forum/userUnLock/" + userId;
+        $.ajax({
+            async: true,
+            type: "get",
+            dataType: "json",
+            url: url,
+            success: function (data) {debugger
+                if(data.msg!=null){
+                    layer.msg(data.msg, {
+                        time: 2000, //2s后自动关闭
+                    });
+                }
+                showUserManage(pageNo);
+            }
+        });
+    }, function(){
+        layer.msg('已取消', {
+            time: 2000, //2s后自动关闭
+        });
+    });
 }
 /**
  * 加载增加板块页面

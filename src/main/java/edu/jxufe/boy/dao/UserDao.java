@@ -11,8 +11,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDao extends BaseDao<User> {
 	private final String GET_USER_BY_USERNAME = "from User u where u.userName = ?";
+
+	private final String GET_USER_BY_USERID = "from User u where u.userId = ?";
 	
 	private final String QUERY_USER_BY_USERNAME = "from User u where u.userName like ?";
+
+	private final String GET_PAGED_USERS = "from User";
 	
     /**
      * 根据用户名查询User对象
@@ -27,7 +31,15 @@ public class UserDao extends BaseDao<User> {
 			return users.get(0);
 		}
     }
-	
+
+    public User getUserByUserId(int userId){
+		List<User> users = (List<User>)getHibernateTemplate().find(GET_USER_BY_USERID,userId);
+		if(users.size()==0){
+			return null;
+		}else {
+			return users.get(0);
+		}
+	}
 	/**
 	 * 根据用户名为模糊查询条件，查询出所有前缀匹配的User对象
 	 * @param userName 用户名查询条件
@@ -35,6 +47,11 @@ public class UserDao extends BaseDao<User> {
 	 */
 	public List<User> queryUserByUserName(String userName){
 	    return (List<User>)getHibernateTemplate().find(QUERY_USER_BY_USERNAME,userName+"%");
+	}
+
+	public Page<User> getPagedUsers(int pageNo,int pageSize){
+		Page<User> page = pagedQuery(GET_PAGED_USERS,pageNo,pageSize,null);
+		return page;
 	}
 
 }
