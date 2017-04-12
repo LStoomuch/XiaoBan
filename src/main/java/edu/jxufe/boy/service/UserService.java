@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import edu.jxufe.boy.dao.LoginLogDao;
+import edu.jxufe.boy.dao.Page;
 import edu.jxufe.boy.dao.UserDao;
 import edu.jxufe.boy.entity.LoginLog;
 import edu.jxufe.boy.entity.User;
@@ -76,7 +77,7 @@ public class UserService {
 	 * @param userId 锁定目标用户的用户名
 	 */
 	public void lockUser(int userId){
-		User user = userDao.getUserByUserId(userId);
+		User user = getUserById(userId);
 		user.setLocked(User.USER_LOCK);
 	    userDao.update(user);
 	}
@@ -86,7 +87,7 @@ public class UserService {
 	 * @param userId 解除锁定目标用户的用户名
 	 */
 	public void unlockUser(int userId){
-		User user = userDao.getUserByUserId(userId);
+		User user = getUserById(userId);
 		user.setLocked(User.USER_UNLOCK);
 		userDao.update(user);
 	}
@@ -99,6 +100,14 @@ public class UserService {
 	 */
 	public List<User> queryUserByUserName(String userName){
 		return userDao.queryUserByUserName(userName);
+	}
+	/**
+	 * 根据用户名为条件，执行模糊查询操作（分页）
+	 * @param userName 查询用户名
+	 * @return 所有用户名前导匹配的userName的用户
+	 */
+	public Page<User> queryUserByUserName(String userName,int pageNo,int pageSize){
+		return userDao.queryUserByUserName(userName,pageNo,pageSize);
 	}
 	
 	/**

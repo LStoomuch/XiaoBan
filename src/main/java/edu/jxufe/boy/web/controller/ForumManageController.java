@@ -65,8 +65,8 @@ public class ForumManageController extends BaseController {
 		modelAndView.setViewName("manager/boardManage");
 		return modelAndView;
 	}
-	@RequestMapping(value = "userManage")
-	public ModelAndView showUserManage(@RequestParam(value = "pageNo",required = false)Integer pageNo){
+	@RequestMapping(value = "userManagePage")
+	public ModelAndView showUserManagePage(@RequestParam(value = "pageNo",required = false)Integer pageNo){
 		pageNo = pageNo==null?1:pageNo;
 		Page pagedUsers =  forumService.getPageUsers(pageNo, CommonConstant.PAGE_SIZE);
 		ModelAndView modelAndView = new ModelAndView();
@@ -204,5 +204,20 @@ public class ForumManageController extends BaseController {
 			map.put("msg","锁定失败");
 		}
 		return map;
+	}
+
+	@RequestMapping(value = "forum/users",method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView userSearchByName(String userName,@RequestParam(value = "pageNo",required = false)Integer pageNo){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("manager/userManage");
+		if (userName==null||userName.equals("")){
+			modelAndView.addObject("msg","用户名不能为空");
+			return modelAndView;
+		}
+		pageNo = pageNo==null?1:pageNo;
+		Page<User> pagedUsers = userService.queryUserByUserName(userName,pageNo,CommonConstant.PAGE_SIZE);
+		modelAndView.addObject("pagedUsers",pagedUsers);
+		return modelAndView;
 	}
 }

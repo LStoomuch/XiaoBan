@@ -17,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
-    <link rel='stylesheet' href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
     <style type="text/css">
         body{
             padding-top: 70px;
@@ -29,10 +29,24 @@
     %>
 </head>
 <body>
-<div class="btn-group">
-    <button id="deleteBoards" class="btn btn-large btn-danger" type="button" onclick="deleteSelectedUsers(<%=pagedUsers.getCurrentPageNo()%>)">批量删除用户</button>
-</div><p/>
+<%--<div class="btn-group">--%>
+    <%--<button id="deleteBoards" class="btn btn-large btn-danger" type="button" onclick="deleteSelectedUsers(<%=pagedUsers.getCurrentPageNo()%>)">批量删除用户</button>--%>
 
+<%--</div>--%>
+<div class="row">
+
+    <div class="col-lg-6">
+<form class="form-group text-right">
+<div class="input-group">
+    <input type="text" id="userNameInput" class="form-control" placeholder="用户名">
+    <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" onclick="searchByUserName();">搜索</button>
+      </span>
+</div>
+</form>
+    </div>
+</div>
+</div>
 <table class="table table-striped table-hover table-bordered">
     <thead>
     <tr>
@@ -111,7 +125,6 @@
         <% } %>
     </ul>
 </div>
-
 
 
 </body>

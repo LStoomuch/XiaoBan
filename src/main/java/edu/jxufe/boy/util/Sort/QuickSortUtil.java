@@ -2,6 +2,7 @@ package edu.jxufe.boy.util.Sort;
 
 /**
  * Created by liaosheng on 2017/4/10.
+ * 快速排序
  */
 public class QuickSortUtil<T extends Comparable<T>> {
     public void sort(T[] arry){

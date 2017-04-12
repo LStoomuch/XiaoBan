@@ -61,12 +61,12 @@ function showBoardManage(pageNo) {
  * 显示用户管理页面
  * @param pageNo
  */
-function showUserManage(pageNo) {
+function showUserManage(pageNo) {debugger
     if (pageNo!=null){
-        var url_managerContainer = getContextPath()+"/ForumManage/userManage?pageNo="+pageNo;
+        var url_managerContainer = getContextPath()+"/ForumManage/userManagePage?pageNo="+pageNo;
 
     }else if (pageNo==null){
-        var url_managerContainer = getContextPath()+"/ForumManage/userManage";
+        var url_managerContainer = getContextPath()+"/ForumManage/userManagePage";
     }
     $.ajax({
         async:true,
@@ -76,6 +76,26 @@ function showUserManage(pageNo) {
             $("#managerContainer").html(html);
         }
     });
+}
+/**
+ * 加载增加板块页面
+ */
+function loadAddBoardPage(boardId) {
+    if(boardId==null) {
+        layer.open({
+            type: 2,
+            content: '/ForumManage/forum/BoardPage',
+            area: ['600px', '360px'],
+            shadeClose: true //点击遮罩关闭
+        });
+    }else{
+        layer.open({
+            type: 2,
+            content: '/ForumManage/forum/BoardPage?boardId='+boardId,
+            area: ['600px', '360px'],
+            shadeClose: true //点击遮罩关闭
+        });
+    }
 }
 /**
  * 获取多选框选中的IDs
@@ -224,23 +244,24 @@ function unlockUser(userId, pageNo) {
         });
     });
 }
-/**
- * 加载增加板块页面
- */
-function loadAddBoardPage(boardId) {
-    if(boardId==null) {
-        layer.open({
-            type: 2,
-            content: '/ForumManage/forum/BoardPage',
-            area: ['600px', '360px'],
-            shadeClose: true //点击遮罩关闭
-        });
-    }else{
-        layer.open({
-            type: 2,
-            content: '/ForumManage/forum/BoardPage?boardId='+boardId,
-            area: ['600px', '360px'],
-            shadeClose: true //点击遮罩关闭
-        });
+
+function searchByUserName() {debugger
+    var data = $("#userNameInput").val();
+    if(data==null||data==""){
+        layer.tips("搜索内容不能为空","#userNameInput",{tips:3});
+        return;
     }
+    var url = "/ForumManage/forum/users";
+    $.ajax({
+        async:true,
+        url:url,
+        type:"post",
+        data:{"userName":data},
+        success:function (html) {
+            $("#managerContainer").html(html);
+        },
+        error:function () {
+          layer.msg("服务出错");
+        }
+    });
 }

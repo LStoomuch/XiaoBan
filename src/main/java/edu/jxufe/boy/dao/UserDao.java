@@ -32,6 +32,35 @@ public class UserDao extends BaseDao<User> {
 		}
     }
 
+	/**
+	 * 根据用户名为模糊查询条件，查询出所有前缀匹配的User对象
+	 * @param userName 用户名查询条件
+	 * @return 用户名前缀匹配的所有User对象
+	 */
+	public List<User> queryUserByUserName(String userName){
+		return (List<User>)getHibernateTemplate().find(QUERY_USER_BY_USERNAME,userName+"%");
+	}
+
+	public Page<User> queryUserByUserName(String userName,int pageNo,int pageSize){
+		return pagedQuery(QUERY_USER_BY_USERNAME,pageNo,pageSize,userName);
+	}
+
+	/**
+	 * 无条件分页查询所有用户
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public Page<User> getPagedUsers(int pageNo,int pageSize){
+		Page<User> page = pagedQuery(GET_PAGED_USERS,pageNo,pageSize,null);
+		return page;
+	}
+
+	/**
+	 * 根据用户ID查询用户
+	 * @param userId
+	 * @return
+	 */
     public User getUserByUserId(int userId){
 		List<User> users = (List<User>)getHibernateTemplate().find(GET_USER_BY_USERID,userId);
 		if(users.size()==0){
@@ -40,18 +69,9 @@ public class UserDao extends BaseDao<User> {
 			return users.get(0);
 		}
 	}
-	/**
-	 * 根据用户名为模糊查询条件，查询出所有前缀匹配的User对象
-	 * @param userName 用户名查询条件
-	 * @return 用户名前缀匹配的所有User对象
-	 */
-	public List<User> queryUserByUserName(String userName){
-	    return (List<User>)getHibernateTemplate().find(QUERY_USER_BY_USERNAME,userName+"%");
-	}
 
-	public Page<User> getPagedUsers(int pageNo,int pageSize){
-		Page<User> page = pagedQuery(GET_PAGED_USERS,pageNo,pageSize,null);
-		return page;
-	}
+
+
+
 
 }
