@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.jxufe.boy</groupId>
-    <artifactId>Blog</artifactId>
+    <artifactId>XiaoBan</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <properties>
@@ -196,7 +196,7 @@
     </dependencies>
 
     <build>
-        <finalName>Blog</finalName>
+        <finalName>XiaoBan</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
