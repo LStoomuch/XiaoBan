@@ -14,7 +14,7 @@ public class UserDao extends BaseDao<User> {
 
 	private final String GET_USER_BY_USERID = "from User u where u.userId = ?";
 	
-	private final String QUERY_USER_BY_USERNAME = "from User u where u.userName like ?";
+	private final String QUERY_USER_BY_USERNAME = "from User u where u.userName like %?%";
 
 	private final String GET_PAGED_USERS = "from User";
 	
@@ -41,6 +41,13 @@ public class UserDao extends BaseDao<User> {
 		return (List<User>)getHibernateTemplate().find(QUERY_USER_BY_USERNAME,userName+"%");
 	}
 
+	/**
+	 * 根据用户名为模糊查询条件，（分页）查询出所有前缀匹配的User对象
+	 * @param userName
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	public Page<User> queryUserByUserName(String userName,int pageNo,int pageSize){
 		return pagedQuery(QUERY_USER_BY_USERNAME,pageNo,pageSize,userName);
 	}
@@ -52,7 +59,7 @@ public class UserDao extends BaseDao<User> {
 	 * @return
 	 */
 	public Page<User> getPagedUsers(int pageNo,int pageSize){
-		Page<User> page = pagedQuery(GET_PAGED_USERS,pageNo,pageSize,null);
+		Page<User> page = super.pagedQuery(GET_PAGED_USERS,pageNo,pageSize,null);
 		return page;
 	}
 
@@ -69,9 +76,5 @@ public class UserDao extends BaseDao<User> {
 			return users.get(0);
 		}
 	}
-
-
-
-
 
 }

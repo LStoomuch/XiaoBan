@@ -244,7 +244,9 @@ function unlockUser(userId, pageNo) {
         });
     });
 }
-
+/**
+ * 按用户名模糊查找用户
+ */
 function searchByUserName() {debugger
     var data = $("#userNameInput").val();
     if(data==null||data==""){

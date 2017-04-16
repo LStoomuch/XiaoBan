@@ -206,6 +206,12 @@ public class ForumManageController extends BaseController {
 		return map;
 	}
 
+	/**
+	 * 按用户名模糊查找用户列表
+	 * @param userName
+	 * @param pageNo
+	 * @return
+	 */
 	@RequestMapping(value = "forum/users",method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView userSearchByName(String userName,@RequestParam(value = "pageNo",required = false)Integer pageNo){

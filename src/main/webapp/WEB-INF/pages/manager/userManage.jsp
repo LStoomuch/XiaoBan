@@ -53,13 +53,12 @@
         <th></th>
         <th>编号</th>
         <th>用户名</th>
+        <th>限制操作</th>
         <th>用户类型</th>
         <th>用户密码</th>
         <th>积分</th>
-        <th>限制操作</th>
         <th>最后登录IP</th>
         <th>最后登录时间</th>
-        <th>操作</th>
     </tr>
     </thead>
     <tbody>
@@ -68,7 +67,23 @@
     <tr>
         <td><input type="checkbox" name="selectIds" id="selectIds" value="<%=userList.get(i).getUserId()%>"/></td>
         <td><%=i+1+(pagedUsers.getCurrentPageNo()-1)*pagedUsers.getPageSize()%></td>
-        <td><%=userList.get(i).getUserName()%></td>
+
+            <%if (userList.get(i).getLocked()==0){%>
+        <td>
+            <i ><%=userList.get(i).getUserName()%></i>
+        </td>
+        <td>
+            <a class="btn btn-success" onclick="lockUser(<%=userList.get(i).getUserId()%>,<%=pagedUsers.getCurrentPageNo()%>)"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;锁定</a>
+        </td>
+            <%}else{%>
+        <td>
+            <i class="glyphicon glyphicon-lock"><%=userList.get(i).getUserName()%></i>
+        </td>
+        <td>
+            <a class="btn btn-danger" onclick="unlockUser(<%=userList.get(i).getUserId()%>,<%=pagedUsers.getCurrentPageNo()%>)"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;解锁</a>
+        </td>
+            <%}%>
+
         <%if (userList.get(i).getUserType()==1){ %>
             <td>普通用户</td>
         <%}else if(userList.get(i).getUserType()==2){%>
@@ -76,13 +91,7 @@
         <%}%>
         <td><%=userList.get(i).getPassword()%></td>
         <td><%=userList.get(i).getCredit()%></td>
-        <td>
-            <%if (userList.get(i).getLocked()==0){%>
-            <a class="btn btn-success" onclick="lockUser(<%=userList.get(i).getUserId()%>,<%=pagedUsers.getCurrentPageNo()%>)"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;锁定</a>
-            <%}else{%>
-            <a class="btn btn-danger" onclick="unlockUser(<%=userList.get(i).getUserId()%>,<%=pagedUsers.getCurrentPageNo()%>)"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;解锁</a>
-            <%}%>
-        </td>
+
         <%if (userList.get(i).getLastIp()!=null){%>
             <td><%=userList.get(i).getLastIp()%></td>
         <%}else{%>
@@ -93,10 +102,7 @@
         <%}else{%>
             <td>从未登录</td>
         <%}%>
-        <td>
 
-            <button class="btn btn btn-warning" onclick="loadAddBoardPage(<%=userList.get(i).getUserId()%>)">修改</button>
-        </td>
     </tr>
     <%}%>
     </tbody>
