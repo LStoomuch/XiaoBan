@@ -4,7 +4,7 @@
     管理员可对会员的权限、论坛版块、帖子和回复的管理。
  
 ### 技术选型
-    前端框架选型：jQuery、bootStrap响应式布局、layer弹出层插件，后端选用Spring、Hibernate、Springmvc等开源框
+    前端框架选型：jQuery、bootStrap、layer弹出层插件，后端选用Spring、Hibernate、Springmvc等开源框
     架开发，数据库使用mysql数据库。使用maven管理项目包之间的依赖。
   
 ### 介绍
