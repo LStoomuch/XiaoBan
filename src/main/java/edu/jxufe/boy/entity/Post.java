@@ -47,6 +47,28 @@ public class Post extends BaseDomain {
 	@Column(name = "deleteflag")
 	private int deleteflag;
 
+	@Column(name = "thumbs_up")
+	private int thumbs_up;
+
+	@Column(name = "thumbs_down")
+	private int thumbs_down;
+
+	public int getThumbs_up() {
+		return thumbs_up;
+	}
+
+	public void setThumbs_up(int thumbs_up) {
+		this.thumbs_up = thumbs_up;
+	}
+
+	public int getThumbs_down() {
+		return thumbs_down;
+	}
+
+	public void setThumbs_down(int thumbs_down) {
+		this.thumbs_down = thumbs_down;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

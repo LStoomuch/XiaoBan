@@ -18,10 +18,10 @@ public class PostDao extends BaseDao<Post> {
 	public Page getPagedPosts(int topicId, int pageNo, int pageSize) {
 		return pagedQuery(GET_PAGED_POSTS,pageNo,pageSize,topicId);
 	}
-    
+
 	/**
-	 * 删除主题下的所有帖子
-	 * @param topicId 主题ID
+	 * 删除一个帖子里所有的评论
+	 * @param topicId
 	 */
 	public void deleteTopicPosts(int topicId) {
 		getHibernateTemplate().bulkUpdate(DELETE_TOPIC_POSTS,topicId);

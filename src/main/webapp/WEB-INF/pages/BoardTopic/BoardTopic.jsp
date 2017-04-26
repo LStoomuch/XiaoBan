@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%--
   Created by IntelliJ IDEA.
   User: liaosheng
@@ -15,13 +15,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${board.boardName}</title>
-    <link rel='stylesheet' type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
 <body>
-<input id="boardId" style="display:none;" value="${board.boardId}"/>
+
 <div id="topPage"></div>        <!-- 顶部导航栏-->
 <div class="container" id="topicContainer"></div>     <!--中部 帖子列表-->
-
+<input id="boardId" style="display:none;" value="${board.boardId}"/>
 
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>

@@ -20,27 +20,27 @@
 
 <div class="container" id="boardsContainer"></div>   <!--中部 显示所有版块 -->
 
-<div id="example">asdas</div>
+<%--<div id="example">asdas</div>--%>
 
-<script type="text/babel">
-    var Counter = React.createClass({
-        getInitialState: function () {
-            return { clickCount: 0 };
-        },
-        handleClick: function () {
-            this.setState(function(state) {
-                return {clickCount: state.clickCount + 1};
-            });
-        },
-        render: function () {
-            return (<p onClick={this.handleClick}>点我！点击次数为: {this.state.clickCount}</p>);
-        }
-    });
-    ReactDOM.render(
-            <Counter />,
-        document.getElementById('example')
-    );
-</script>
+<%--<script type="text/babel">--%>
+    <%--var Counter = React.createClass({--%>
+        <%--getInitialState: function () {--%>
+            <%--return { clickCount: 0 };--%>
+        <%--},--%>
+        <%--handleClick: function () {--%>
+            <%--this.setState(function(state) {--%>
+                <%--return {clickCount: state.clickCount + 1};--%>
+            <%--});--%>
+        <%--},--%>
+        <%--render: function () {--%>
+            <%--return (<p onClick={this.handleClick}>点我！点击次数为: {this.state.clickCount}</p>);--%>
+        <%--}--%>
+    <%--});--%>
+    <%--ReactDOM.render(--%>
+            <%--<Counter />,--%>
+        <%--document.getElementById('example')--%>
+    <%--);--%>
+<%--</script>--%>
 <script src='http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js'></script>
 <script src='http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 <script src="../../../js/pub/layer/layer.js"></script>

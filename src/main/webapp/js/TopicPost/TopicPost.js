@@ -12,7 +12,7 @@ function loadPage() {
 }
 
 function askForLogin() {
-    layer.tips("请先登录", '#addPostButton', {tips: 1});
+    layer.msg("请先登录");
 }
 
 function addPost() {debugger
@@ -33,7 +33,7 @@ function addPost() {debugger
         type:"post",
         data:formData,
         dataType:"json",
-        beforeSend: function () {
+        beforeSend: function () {debugger
             //3.让提交按钮失效，以实现防止按钮重复点击
             $("#addPostButton").attr('disabled', 'disabled');
 
@@ -56,6 +56,49 @@ function addPost() {debugger
         }
     });
 }
+/**
+ * 点赞按钮
+ */
+function thumbs_up(postId,userId) {
+    $.ajax({
+       async : true,
+        url  : "/thumb/thumbUp",
+        type : "post",
+        data : {
+            "postId":postId,
+            "userId":userId
+        },
+        dataType:"json",
+        success:function (data) {debugger
+            $("#span_thumb_up").html(data.thumbNum);
+        },
+        error:function (data) {
+            layer.alert(data.msg);
+        }
+    });
+}
+/**
+ * 反对按钮
+ */
+function thumbs_down(postId, userId) {
+    $.ajax({
+        async : true,
+        url  : "/thumb/thumbDown",
+        type : "post",
+        data : {
+            "postId":postId,
+            "userId":userId
+        },
+        dataType:"json",
+        success:function (data) {debugger
+            $("#span_thumb_down").html(data.thumbNum);
+        },
+        error:function (data) {
+            layer.alert(data.msg);
+        }
+    });
+}
+
 // function addPost2() {
 //     var currentPage = $("#currentPage").text();
 //     document.location.href="/BoardManage/board/Post?currentPage="+currentPage;

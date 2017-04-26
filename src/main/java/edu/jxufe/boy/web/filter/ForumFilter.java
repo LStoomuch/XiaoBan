@@ -41,7 +41,8 @@ public class ForumFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			String a = httpRequest.getRequestURI();
- 			if(a.contains(".css") || a.contains(".js") || a.contains(".png")|| a.contains(".jpg")||a.contains(".ico")){
+ 			if(a.contains(".css") || a.contains(".js") || a.contains(".png")|| a.contains(".jpg")||a.contains(".ico")||a.contains(".ttf")||a.contains(".woff"))
+ 			{
 				//如果发现是css或者js文件，直接放行
 				chain.doFilter(request, response);
 			}else {

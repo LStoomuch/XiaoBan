@@ -57,6 +57,21 @@
         &nbsp;积分：<%=postList.get(i).getUser().getCredit()%>
         <p class="userInfo">&nbsp;时间：<%=postList.get(i).getCreateTime()%></p>
         </p>
+        <%if (!(postList.get(i) instanceof MainPost)&&user!=null){%>
+        <button type="button" class="btn btn-default" aria-label="Left Align"  onclick="thumbs_up(<%=postList.get(i).getPostId()%>,<%=user.getUserId()%>)">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" id="span_thumb_up"> <%=postList.get(i).getThumbs_up()%></span>
+        </button>
+        <button type="button" class="btn btn-default" aria-label="Left Align"  onclick="thumbs_down(<%=postList.get(i).getPostId()%>,<%=user.getUserId()%>)">
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" id="span_thumb_down"> <%=postList.get(i).getThumbs_down()%></span>
+        </button>
+        <%}else if (!(postList.get(i) instanceof MainPost)&&user==null){%>
+        <button type="button" class="btn btn-default" aria-label="Left Align" id="thumbs_up" onclick="askForLogin();">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"> <%=postList.get(i).getThumbs_up()%></span>
+        </button>
+        <button type="button" class="btn btn-default" aria-label="Left Align" id="thumbs_down" onclick="askForLogin();">
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"> <%=postList.get(i).getThumbs_down()%></span>
+        </button>
+        <%}%>
     </blockquote>
     <% if (postList.size()==1&&postList.get(i) instanceof MainPost){%>
     <blockquote>

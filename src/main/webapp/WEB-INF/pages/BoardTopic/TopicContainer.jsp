@@ -49,7 +49,7 @@
         <a  href="<c:url value="/BoardManage/board/loadTopicPostPage-${topic.topicId}"/>">
                 ${topic.topicTitle}
                     <c:if test="${topic.digest > 0}">
-                        <font color=red>(★精品)</font>
+                        <span class="glyphicon glyphicon-fire" style="color: #ac2925">精品</span>
                     </c:if>
         </a>
         </h4>

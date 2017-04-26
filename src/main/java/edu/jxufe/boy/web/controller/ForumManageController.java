@@ -226,4 +226,5 @@ public class ForumManageController extends BaseController {
 		modelAndView.addObject("pagedUsers",pagedUsers);
 		return modelAndView;
 	}
+
 }
